@@ -1,6 +1,7 @@
 <?php
 require_once "../controller/UserController.php";
 //get the json request
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 //parse request data
