@@ -80,18 +80,26 @@ class UserRepository
 
         $connection = new mysqli($db_hostname, $db_username, $db_password, $db_database);
         if ($connection->connect_error) die($connection->connect_error);
-
-
-        $user_id = $user->getId();
-        $user_name = $user->getName();
         $user_email = $user->getEmail();
         $user_username = $user->getUsername();
-        $user_birthday = $user->getBirthday();
+        $user_password = $user->getPasswdhash();
+        $query = "SELECT * FROM users WHERE username= ? OR email= ? LIMIT 1";
+        $params = [$user_username, $user_email];
+        $types = "ss";
+        $query = $this->mysqli_query_params($connection, $query, $params, $types);
+        $result = $query->get_result();
 
-        $query = "INSERT INTO users (id,name, email, usernane, birthday) VALUES ($user_id, '$user_name', '$user_email', '$user_username', '$user_birthday')";
-        $result = $connection->query($query);
-
-        if (!$result) die($connection->error);
+        if($result->num_rows == 0) {
+            $query = "INSERT INTO users (email, username, passwordhash) VALUES (?, ?, ?)";
+            $params = [$user_email,$user_username, md5($user_password)];
+            $types = "sss";
+            $query = $this->mysqli_query_params($connection, $query, $params, $types);
+            $query->get_result();
+            return true;
+        }
+        else{
+            return null;
+        }
 
         $connection->close();
     }

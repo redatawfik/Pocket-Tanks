@@ -1,11 +1,13 @@
 <?php
 require_once "../controller/UserController.php";
+require_once "../model/User.php";
+
 //get the json request
 $data = json_decode(file_get_contents('php://input'), true);
 
-//parse request data
-$email = $data['Email'];
-$password = $data['Password'];
+$email = $data['email'];
+$username = $data['username'];
+$password = $data['password'];
 
 $response = null;
 $m = null;
@@ -16,12 +18,18 @@ if(sizeof($m) < 1){
     $response = array('Status' => 'Error', 'Msg' => 'Email format Not valid');
 }
 else {
+
+    $user = new User();
+    $user->setEmail($email);
+    $user->setUsername($username);
+    $user->setPasswdhash($password);
+
     $user_controller = new UserController();
-    $res = $user_controller->loginUser($email, $password);
-    if (!$res)
-        http_response_code(401);
+    $res = $user_controller->Create($user);
+    if ($res == null)
+        $response = array('status' => 'error', 'msg' => 'Already registered');
     else {
-        $response = array('Status' => 'Success', 'id' => $res[0][0], 'username' => $res[0][1], 'email' => $res[0][2], 'birthdate' => $res[0][4]);
+        http_response_code(201);
     }
 }
 if($response)

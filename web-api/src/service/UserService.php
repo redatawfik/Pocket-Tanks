@@ -18,7 +18,7 @@ class UserService
     public function create($user)
     {
         $user_repo = new UserRepository();
-        $user_repo->create($user);
+        return $user_repo->create($user);
     }
 
     public function update($user)

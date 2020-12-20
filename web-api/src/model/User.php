@@ -7,6 +7,23 @@ class User
     private $email;
     private $username;
     private $birthday;
+    private $passwdhash;
+
+    /**
+     * @param mixed $passwdhash
+     */
+    public function setPasswdhash($passwdhash): void
+    {
+        $this->passwdhash = $passwdhash;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswdhash()
+    {
+        return $this->passwdhash;
+    }
 
     /**
      * Employee constructor.
@@ -31,7 +48,21 @@ class User
         $this->id = $id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
     /**
      * @return mixed
