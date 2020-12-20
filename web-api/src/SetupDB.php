@@ -23,7 +23,7 @@ $conn->close();
 //add tables
 $db_name = "pocket_tank";
 $conn = new mysqli($db_hostname, $db_username, $db_password, $db_name);
-$sql = "CREATE TABLE Users (
+$sql = "CREATE TABLE users (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 username VARCHAR(30) NOT NULL,
 email VARCHAR(245) NOT NULL,
