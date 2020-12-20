@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1735357b-f4a3-4a0e-a29f-0268d609d1ce" name="Default Changelist" comment="" />
+    <list default="true" id="1735357b-f4a3-4a0e-a29f-0268d609d1ce" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SetupDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetupDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository/UserRepository.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +26,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -35,25 +41,16 @@
       <option name="presentableId" value="Default" />
       <updated>1608485122817</updated>
       <workItem from="1608485124244" duration="1837000" />
+<<<<<<< HEAD
       <workItem from="1608495100205" duration="4733000" />
+=======
+      <workItem from="1608495100205" duration="1596000" />
+      <workItem from="1608497876869" duration="3550000" />
+>>>>>>> 5ad61961d2e645c7ee2130349df7b6db709ba6b6
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="475" y="55" key="#PHP" timestamp="1608496896091">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="475" y="55" key="#PHP/0.0.1536.824@0.0.1536.824" timestamp="1608496896091" />
-    <state x="549" y="154" key="FileChooserDialogImpl" timestamp="1608485525816">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="154" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1608485525816" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1608495149435">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1608495149435" />
   </component>
 </project>

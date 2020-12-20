@@ -60,7 +60,7 @@ class UserRepository
         $connection = new mysqli($db_hostname, $db_username, $db_password, $db_database);
         if ($connection->connect_error) die($connection->connect_error);
 
-        $sql ='SELECT * FROM users WHERE email = ? and passwordhash = ?';
+        $sql ='SELECT * FROM Users WHERE email = ? and passwordhash = ?';
         $params = [$username, md5($password)];
         $types = "ss";
         $sql = $this->mysqli_query_params($connection, $sql, $params, $types);
