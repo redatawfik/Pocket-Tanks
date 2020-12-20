@@ -1,6 +1,6 @@
 <?php
 
-require_once "src/service/UserService.php";
+require_once "../service/UserService.php";
 
 class UserController
 {
@@ -9,7 +9,10 @@ class UserController
         $user_ser = new UserService();
         return $user_ser->getAll();
     }
-
+    public function loginUser($username, $Password){
+        $user_ser = new UserService();
+        return $user_ser->loginUser($username, $Password);
+    }
     public function create($user)
     {
         $user_ser = new UserService();

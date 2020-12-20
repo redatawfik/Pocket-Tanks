@@ -1,6 +1,6 @@
 <?php
 
-require_once "src/repository/UserRepository.php";
+require_once "../repository/UserRepository.php";
 
 class UserService
 {
@@ -11,6 +11,10 @@ class UserService
         return $user_repo->getAll();
     }
 
+    public function loginUser($username, $passwd){
+        $user_repo = new UserRepository();
+        return $user_repo->login($username, $passwd);
+    }
     public function create($user)
     {
         $user_repo = new UserRepository();

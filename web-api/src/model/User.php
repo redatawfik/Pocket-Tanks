@@ -4,7 +4,6 @@
 class User
 {
     private $id;
-    private $name;
     private $email;
     private $username;
     private $birthday;
@@ -32,21 +31,7 @@ class User
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @return mixed

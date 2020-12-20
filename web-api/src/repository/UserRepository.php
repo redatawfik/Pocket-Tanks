@@ -1,6 +1,6 @@
 <?php
 
-require_once "src/model/User.php";
+require_once "../model/User.php";
 
 
 class UserRepository
@@ -17,7 +17,7 @@ class UserRepository
         if ($connection->connect_error) die($connection->connect_error);
 
 
-        $query = "SELECT * FROM User";
+        $query = "SELECT * FROM users";
         $result = $connection->query($query);
         if (!$result) die($connection->error);
 
@@ -42,6 +42,35 @@ class UserRepository
         return $arr_user;
     }
 
+    //prepared statements and parameterized queries to prevent sqli attacks
+    function mysqli_query_params($mysqli, $query, $params, $types = NULL)
+    {
+        $statement = $mysqli->prepare($query);
+        $types = $types ?: str_repeat('s', count($params));
+        $statement->bind_param($types, ...$params);
+        $statement->execute();
+        return $statement;
+    }
+
+    public function login($username, $password){
+        $db_hostname = 'localhost';
+        $db_database = 'pocket_tank';
+        $db_username = 'root';
+        $db_password = '';
+        $connection = new mysqli($db_hostname, $db_username, $db_password, $db_database);
+        if ($connection->connect_error) die($connection->connect_error);
+
+        $sql ='SELECT * FROM users WHERE email = ? and passwordhash = ?';
+        $params = [$username, md5($password)];
+        $types = "ss";
+        $sql = $this->mysqli_query_params($connection, $sql, $params, $types);
+
+        $result = $sql->get_result();
+        if(!$result) return null;
+        return $result->fetch_all();
+
+    }
+
     public function create($user)
     {
         $db_hostname = 'localhost';
@@ -59,7 +88,7 @@ class UserRepository
         $user_username = $user->getUsername();
         $user_birthday = $user->getBirthday();
 
-        $query = "INSERT INTO User (id,name, email, usernane, birthday) VALUES ($user_id, '$user_name', '$user_email', '$user_username', '$user_birthday')";
+        $query = "INSERT INTO users (id,name, email, usernane, birthday) VALUES ($user_id, '$user_name', '$user_email', '$user_username', '$user_birthday')";
         $result = $connection->query($query);
 
         if (!$result) die($connection->error);
