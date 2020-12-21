@@ -3,6 +3,11 @@ package game;
 public class Bullet extends GameObject {
 
     private float initialX, initialY, velX, velY;
+    private Tank tank;
+
+    public Bullet(Tank tank) {
+        this.tank = tank;
+    }
 
     public Bullet(float x, float y) {
         this.setX(x);
@@ -11,6 +16,14 @@ public class Bullet extends GameObject {
         this.setHeight(2);
         initialX = x;
         initialY = y;
+    }
+
+    public Tank getTank() {
+        return tank;
+    }
+
+    public void setTank(Tank tank) {
+        this.tank = tank;
     }
 
     public float getVelX() {

@@ -103,7 +103,7 @@ public class GameDisplay implements GLEventListener {
             frames++;
         }
         elapsedNanos = elapsedNanos + deltaTime;
-       // System.out.println(elapsedNanos + " - " + deltaTime);
+        // System.out.println(elapsedNanos + " - " + deltaTime);
         return deltaTime < 0 ? 0 : deltaTime / 1000000000f;
     }
 
@@ -116,7 +116,7 @@ public class GameDisplay implements GLEventListener {
 
 
         gl.glTranslatef(x, y, 0);
-            gl.glRotated(-rotation, 0, 0, 1);
+        gl.glRotated(-rotation, 0, 0, 1);
 
         //gl.glColor4f(1, 0, 0, .6f);
 
@@ -140,7 +140,7 @@ public class GameDisplay implements GLEventListener {
 
         gl.glBindTexture(GL2.GL_TEXTURE_2D, 0);
 
-         gl.glRotated(rotation, 0, 0, 1);
+        gl.glRotated(rotation, 0, 0, 1);
         gl.glTranslatef(-x, -y, 0);
     }
 
@@ -168,5 +168,29 @@ public class GameDisplay implements GLEventListener {
 
     public void setMyMove(int i) {
         myMove = i;
+    }
+
+    public void drawGround(float[] mesh) {
+
+        gl.glColor3f(0, 1, 1);
+
+//        gl.glVertex2d(10, 10);
+//        gl.glVertex2d(20, 0);
+//        gl.glVertex2d(10, 0);
+        for (int i = 0; i < mesh.length-1; i++) {
+            gl.glBegin(GL2.GL_POLYGON);
+            gl.glVertex2d(i, mesh[i]);
+            gl.glVertex2d(i+1, mesh[i+1]);
+            gl.glVertex2d(i+1, 0);
+            gl.glVertex2d(i, 0);
+            gl.glEnd();
+        }
+
+//        gl.glVertex2d(100, 0);
+//        gl.glVertex2d(0, 0);
+//        gl.glVertex2d(0, 5);
+//
+//        gl.glEnd();
+
     }
 }
