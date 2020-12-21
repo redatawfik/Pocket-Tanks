@@ -19,3 +19,6 @@
 /front-end/pocket-front-web-main/npm-debug.log*
 /front-end/pocket-front-web-main/yarn-debug.log*
 /front-end/pocket-front-web-main/yarn-error.log*
+
+/game/target/
+/game/.idea/
