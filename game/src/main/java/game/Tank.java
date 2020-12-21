@@ -3,10 +3,11 @@ package game;
 public class Tank extends GameObject {
     private GameObject canon;
 
-    public Tank(float x, float y) {
-        this.canon = new GameObject(x + .5f, y-.1f, 5, 5, new ImageResource("/m1.png"));
+    public Tank(float x, float y, String canonImage) {
+        this.canon = new GameObject(x + .5f, y-.1f, 5, 5, new ImageResource("/" + canonImage));
         this.setX(x);
         this.setY(y);
+        this.setImageResource(new ImageResource("/tank.png"));
     }
 
     @Override

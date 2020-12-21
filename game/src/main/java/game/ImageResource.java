@@ -23,9 +23,9 @@ public class ImageResource {
             e.printStackTrace();
         }
 
-        if (image != null) {
-            image.flush();
-        }
+//        if (image != null) {
+//            image.flush();
+//        }
     }
 
     public Texture getTexture() {

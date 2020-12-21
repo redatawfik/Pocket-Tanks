@@ -1,8 +1,5 @@
 package game;
 
-import java.time.Duration;
-import java.time.LocalTime;
-
 public class World {
 
     private static World instance;
@@ -15,8 +12,8 @@ public class World {
     private Bullet bullet;
 
     private World() {
-        myTank = new Tank(xx, yy);
-        enemyTank = new Tank(xx + 65, yy);
+        myTank = new Tank(xx, yy, "m1.png");
+        enemyTank = new Tank(xx + 65, yy, "m1.png");
         imageResource = new ImageResource("/tank.png");
     }
 
@@ -54,17 +51,13 @@ public class World {
     boolean isShooting = false;
 
     public void draw() {
-        myTank.getCanon().setImageResource(new ImageResource("/m1.png"));
-        enemyTank.getCanon().setImageResource(new ImageResource("/md3.png"));
-        myTank.setImageResource(new ImageResource("/tank.png"));
-        enemyTank.setImageResource(new ImageResource("/tank.png"));
         myTank.draw();
         enemyTank.draw();
         myTank.getCanon().draw();
         enemyTank.getCanon().draw();
         if (bullet != null) {
             float deltaTime = GameDisplay.getInstance().getDeltaTime();
-            time += deltaTime * 1.5;
+            time += deltaTime * 30;
             float initX = myTank.getCanon().getX();
             float initY = myTank.getCanon().getY();
 
