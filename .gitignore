@@ -1,0 +1,21 @@
+# dependencies
+/front-end/pocket-front-web-main/node_modules
+/front-end/pocket-front-web-main/.pnp
+/front-end/pocket-front-web-main/pnp.js
+
+# testing
+/front-end/pocket-front-web-main/coverage
+
+# production
+/front-end/pocket-front-web-main/build
+
+# misc
+/front-end/pocket-front-web-main/.DS_Store
+/front-end/pocket-front-web-main/.env.local
+/front-end/pocket-front-web-main/.env.development.local
+/front-end/pocket-front-web-main/.env.test.local
+/front-end/pocket-front-web-main/.env.production.local
+
+/front-end/pocket-front-web-main/npm-debug.log*
+/front-end/pocket-front-web-main/yarn-debug.log*
+/front-end/pocket-front-web-main/yarn-error.log*

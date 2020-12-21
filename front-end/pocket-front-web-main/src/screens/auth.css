@@ -1,0 +1,10 @@
+.btn-holder {
+    padding: 10px;
+}
+.auth-staff {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
