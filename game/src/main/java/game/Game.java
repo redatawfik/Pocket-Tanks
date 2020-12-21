@@ -36,7 +36,7 @@ public class Game extends JFrame {
         glCanvas.addKeyListener(new KeyInput());
 
         //create the animator
-        animator = new FPSAnimator(glCanvas, 60);
+        animator = new FPSAnimator(glCanvas, 400);
 
         getContentPane().add(glCanvas, BorderLayout.CENTER);
         setSize(500, 300);

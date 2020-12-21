@@ -1,5 +1,8 @@
 package game;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 public class World {
 
     private static World instance;
@@ -44,11 +47,11 @@ public class World {
 
 
     final double DEG2RAD = Math.PI / 180;
-    double ang = 70 * DEG2RAD;
-    double initialVelo = 30;
+    double ang = 20 * DEG2RAD;
+    double initialVelo = 40;
     float g = -9.8f;
-    float time = 0;
-
+    float time;
+    boolean isShooting = false;
 
     public void draw() {
         myTank.getCanon().setImageResource(new ImageResource("/m1.png"));
@@ -59,32 +62,30 @@ public class World {
         enemyTank.draw();
         myTank.getCanon().draw();
         enemyTank.getCanon().draw();
-
-        time += .1;
-
         if (bullet != null) {
+            float deltaTime = GameDisplay.getInstance().getDeltaTime();
+            time += deltaTime * 1.5;
+            float initX = myTank.getCanon().getX();
+            float initY = myTank.getCanon().getY();
 
+            float velX = (float) (initialVelo * Math.cos(ang));
+            float velY = (float) (initialVelo * Math.sin(ang));
+
+            float currVelo = velY + g * time;
+
+            float x = velX * time + initX;
+            float y = (float) (currVelo * time + initY + .5 * g * Math.pow(time, 2));
+            bullet.setX(x);
+            bullet.setY(y);
 
             bullet.setImageResource(new ImageResource("/bullet.png"));
 
-       //     float x = (float) (initialX + (initialVelo * Math.cos(ang)));
-            float initialX = bullet.getX();
-            float x = initialX+1;
-            bullet.setX(x+GameDisplay.getInstance().getDeltaTime());
-
-
-//            double first = (x * Math.tan(ang));
-//            double second = (-9.8 * Math.pow(x, 2)) /
-//                    (2 * Math.pow(initialVelo, 2) * Math.pow(Math.cos(ang), 2));
-//            float y = (float) (first + second);
-//
-//            System.out.println("X: " + x + "   Y: " + y);
-//            bullet.setY(y+GameDisplay.getInstance().getDeltaTime());
-//            // bullet.setX(bullet.getX() + GameDisplay.getInstance().getDeltaTime() * 10);
-//            // bullet.setY(y + 1);
             bullet.draw();
-           // if(bullet.getY()<0||bullet.getX()>100) bullet = null;
 
+            if (bullet.getY() < 0 || bullet.getX() > 100) {
+                bullet = null;
+                isShooting = false;
+            }
         }
     }
 
@@ -110,14 +111,18 @@ public class World {
 
     public void myCanonUp() {
         myTank.getCanon().setRotation(myTank.getCanon().getRotation() - .5f);
+        System.out.println(myTank.getCanon().getRotation());
     }
 
     public void myCanonDown() {
         myTank.getCanon().setRotation(myTank.getCanon().getRotation() + .5f);
     }
 
-
     public void shoot() {
+        if (isShooting) return;
+        time = 0;
+        isShooting = true;
+        ang = -myTank.getCanon().getRotation() * DEG2RAD;
         bullet = new Bullet(myTank.getCanon().getX(), myTank.getCanon().getY());
     }
 }
