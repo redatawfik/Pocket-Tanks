@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Ground {
     private static Ground instance;
 
-    private float[] mesh;
+    private final float[] mesh;
 
     private Ground() {
         this.mesh = new float[110];
@@ -61,5 +61,23 @@ public class Ground {
 
     public void draw() {
         GameDisplay.getInstance().drawGround(mesh);
+    }
+
+    public void destroyGround(float x) {
+        float[] min = new float[9];
+        float nn = .2f;
+
+        for (int i = 0; i < min.length; i++) {
+            min[i] = nn;
+            if (i < min.length / 2) {
+                nn += .1;
+            } else {
+                nn -= .1;
+            }
+        }
+
+        for (int i = (int) (x - 4), y = 0; i <= x + 4; i++, y++) {
+            mesh[i] -= min[y];
+        }
     }
 }

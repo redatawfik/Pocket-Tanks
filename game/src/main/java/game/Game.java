@@ -29,17 +29,21 @@ public class Game extends JFrame {
         profile = GLProfile.get(GLProfile.GL2);
         GLCapabilities capabilities = new GLCapabilities(profile);
         final GLCanvas glCanvas = new GLCanvas(capabilities);
-        display.setCanvas(glCanvas);
 
         //GLCanvas glCanvas = new GLCanvas();
         glCanvas.addGLEventListener(display);
         glCanvas.addKeyListener(new KeyInput());
 
         //create the animator
-        animator = new FPSAnimator(glCanvas, 400);
+        animator = new FPSAnimator(glCanvas, 60);
 
         getContentPane().add(glCanvas, BorderLayout.CENTER);
         setSize(500, 300);
+
+        //this.setResizable(false);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+       // pack();
 
         //center the JFrame on the screen
         centerWindow(this);

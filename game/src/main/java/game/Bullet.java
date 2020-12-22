@@ -2,43 +2,60 @@ package game;
 
 public class Bullet extends GameObject {
 
-    private float initialX, initialY, velX, velY;
-    private Tank tank;
+    private final BulletDestructor destructor;
+    private final double DEG2RAD = Math.PI / 180;
+    private final float g = -9.8f;
+    private final double angel;
+    private final float initialX;
+    private final float initialY;
+    private final float initialVelocity;
+    private float time;
+    private final float[] mesh;
 
-    public Bullet(Tank tank) {
-        this.tank = tank;
+    public Bullet(float angel, float initialX, float initialY, float initialVelocity, BulletDestructor destructor) {
+        this.angel = -angel * DEG2RAD;
+        this.initialX = initialX;
+        this.initialY = initialY;
+        this.initialVelocity = initialVelocity;
+        this.time = 0;
+        this.destructor = destructor;
+        this.setWidth(1f);
+        this.setHeight(1f);
+        mesh = Ground.getInstance().getMesh();
+        setImageResource(new ImageResource("/bullet.png"));
     }
 
-    public Bullet(float x, float y) {
-        this.setX(x);
-        this.setY(y);
-        this.setWidth(2);
-        this.setHeight(2);
-        initialX = x;
-        initialY = y;
+    private void shoot() {
+
+        float deltaTime = GameDisplay.getInstance().getDeltaTime();
+        time += deltaTime;
+
+        float velX = (float) (initialVelocity * Math.cos(angel));
+        float velY = (float) (initialVelocity * Math.sin(angel));
+
+        float currVelo = velY + g * time;
+
+        float x = velX * time + initialX;
+        float y = (float) (currVelo * time + initialY + .5 * g * Math.pow(time, 2));
+
+        System.out.println("X: " + x + "   Y: " + y);
+        setX(x);
+        setY(y);
+
+        draw();
+
+        if (getX() < 0 || getX() > 100) {
+            destructor.destroy();
+            return;
+        }
+
+        if (getY() <= mesh[(int) getX()]) {
+            Ground.getInstance().destroyGround(getX());
+            destructor.destroy();
+        }
     }
 
-    public Tank getTank() {
-        return tank;
-    }
-
-    public void setTank(Tank tank) {
-        this.tank = tank;
-    }
-
-    public float getVelX() {
-        return velX;
-    }
-
-    public void setVelX(float velX) {
-        this.velX = velX;
-    }
-
-    public float getVelY() {
-        return velY;
-    }
-
-    public void setVelY(float velY) {
-        this.velY = velY;
+    public void update() {
+        shoot();
     }
 }

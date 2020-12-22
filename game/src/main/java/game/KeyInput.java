@@ -1,43 +1,37 @@
 package game;
 
+import game.action.MyAction;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyInput implements KeyListener {
 
-    private boolean shouldMove = false;
+    private boolean shouldMove = true;
 
     public void keyTyped(KeyEvent e) {
     }
 
     public void keyPressed(KeyEvent e) {
 
-        if(shouldMove && e.getKeyCode() == KeyEvent.VK_LEFT) {
-
-            World.getInstance().startMoveLeft();
-
+        if (shouldMove && e.getKeyCode() == KeyEvent.VK_LEFT) {
+            MyAction.getInstance().moveLeft();
             shouldMove = false;
-        } else if(shouldMove && e.getKeyCode() == KeyEvent.VK_RIGHT) {
-
-            World.getInstance().startMoveRight();
-
+        } else if (shouldMove && e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            MyAction.getInstance().moveRight();
             shouldMove = false;
         }
 
-         if(e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            MyAction.getInstance().canonUp();
 
-            World.getInstance().myCanonUp();
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            MyAction.getInstance().canonDown();
 
-        }else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+        }
 
-             World.getInstance().myCanonDown();
-
-         }
-
-        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-
-            World.getInstance().shoot();
-
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            MyAction.getInstance().shoot();
         }
     }
 

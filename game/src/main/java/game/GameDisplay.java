@@ -16,13 +16,11 @@ public class GameDisplay implements GLEventListener {
     private static GameDisplay instance;
 
     private GL2 gl;
-    private GLCanvas canvas;
 
     private LocalTime startTime;
     private long elapsedSeconds;
     private int elapsedNanos;
     int frames = 0;
-    private int myMove = 0;
 
     private GameDisplay() {
     }
@@ -45,28 +43,13 @@ public class GameDisplay implements GLEventListener {
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 
         gl.glEnable(GL2.GL_TEXTURE_2D);
-        //gl.glEnable(GL2.GL_BLEND);
 
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-
-//        gl.glEnable(GL2.GL_TEXTURE_2D);
-//        gl.glEnable(GL2.GL_BLEND);
-//        gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-//
-//
-//        //gl.glViewport(0, 0, 500, 300);
-//
-//        gl.glMatrixMode(GL2.GL_PROJECTION);
-//        gl.glLoadIdentity();
-//
-//        gl.glOrtho(-10, 10, -10, 10, -1, 1);
     }
 
 
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
-        float deltaTime = getDeltaTime();
-        //System.out.println(deltaTime);
         gl = glAutoDrawable.getGL().getGL2();
 
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
@@ -81,13 +64,6 @@ public class GameDisplay implements GLEventListener {
         World.getInstance().draw();
 
         gl.glDisable(GL.GL_BLEND);
-
-//        World.getInstance().draw();
-//        for (GameObject gameObject : gameObjects) {
-//            gameObject.draw(this);
-//        }
-
-        //   drawImage(new ImageResource("/me.png"), 0, 0, 10, 10);
 
         gl.glEnd();
     }
@@ -108,7 +84,7 @@ public class GameDisplay implements GLEventListener {
     }
 
     public void drawImage(ImageResource image, float x, float y, float width, float height, float rotation) {
-        Texture texture = image.getTexture();
+         Texture texture = image.getTexture();
 
         if (texture != null) {
             gl.glBindTexture(GL2.GL_TEXTURE_2D, texture.getTextureObject());
@@ -161,36 +137,17 @@ public class GameDisplay implements GLEventListener {
 
     }
 
-    public void setCanvas(GLCanvas glCanvas) {
-        this.canvas = glCanvas;
-    }
-
-
-    public void setMyMove(int i) {
-        myMove = i;
-    }
-
     public void drawGround(float[] mesh) {
 
         gl.glColor3f(0, 1, 1);
 
-//        gl.glVertex2d(10, 10);
-//        gl.glVertex2d(20, 0);
-//        gl.glVertex2d(10, 0);
-        for (int i = 0; i < mesh.length-1; i++) {
+        for (int i = 0; i < mesh.length - 1; i++) {
             gl.glBegin(GL2.GL_POLYGON);
             gl.glVertex2d(i, mesh[i]);
-            gl.glVertex2d(i+1, mesh[i+1]);
-            gl.glVertex2d(i+1, 0);
+            gl.glVertex2d(i + 1, mesh[i + 1]);
+            gl.glVertex2d(i + 1, 0);
             gl.glVertex2d(i, 0);
             gl.glEnd();
         }
-
-//        gl.glVertex2d(100, 0);
-//        gl.glVertex2d(0, 0);
-//        gl.glVertex2d(0, 5);
-//
-//        gl.glEnd();
-
     }
 }

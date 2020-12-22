@@ -1,11 +1,18 @@
 package game;
 
-public class Tank extends GameObject {
-    private GameObject canon;
-    private int moves = 5;
 
-    public Tank(float x, float y, String canonImage) {
-        this.canon = new GameObject(x + .5f, y - .1f, 5, 5, new ImageResource("/" + canonImage));
+public class Tank extends GameObject implements BulletDestructor {
+
+    private final GameObject canon;
+    private Bullet bullet;
+
+    private int moves = 5;
+    private int leftMoves;
+    private int rightMoves;
+
+    public Tank(float x, float y, String canonImage, float angel) {
+        this.canon = new GameObject(x + .5f, y - .1f, 5, 5,
+                new ImageResource("/" + canonImage), angel);
         this.setX(x);
         this.setY(Ground.getInstance().getMesh()[(int) x] + .88f);
         this.setImageResource(new ImageResource("/tank.png"));
@@ -13,8 +20,8 @@ public class Tank extends GameObject {
 
     @Override
     public void setX(float x) {
-        if(x<0) x=0;
-        if(x>100) x=100;
+        if (x < 0) x = 0;
+        if (x > 100) x = 100;
         super.setX(x);
         canon.setX(x + .5f);
         setY(Ground.getInstance().getMesh()[(int) x] + .88f);
@@ -37,11 +44,57 @@ public class Tank extends GameObject {
 
     @Override
     public void draw() {
+        // Draw tank
         setY(Ground.getInstance().getMesh()[(int) getX()] + .88f);
         super.draw();
+
+        // Draw Canon
+        canon.draw();
     }
 
     public GameObject getCanon() {
         return canon;
+    }
+
+    public void update() {
+        if (leftMoves > 0) {
+            setX(getX() - 0.04f);
+            leftMoves--;
+        } else if (rightMoves > 0) {
+            setX(getX() + 0.04f);
+            rightMoves--;
+        }
+
+        if (bullet != null) {
+            bullet.update();
+        }
+    }
+
+    public void shoot() {
+        bullet = new Bullet(canon.getRotation(), getX(), getY(), 30, this);
+    }
+
+    public void moveLeft() {
+        if (leftMoves != 0 || rightMoves != 0) return;
+        leftMoves = 150;
+    }
+
+    public void moveRight() {
+        if (leftMoves != 0 || rightMoves != 0) return;
+        rightMoves = 150;
+        moves--;
+    }
+
+    public void canonUp() {
+        getCanon().setRotation(canon.getRotation() - .5f);
+    }
+
+    public void canonDown() {
+        getCanon().setRotation(canon.getRotation() + .5f);
+    }
+
+    @Override
+    public void destroy() {
+        bullet = null;
     }
 }

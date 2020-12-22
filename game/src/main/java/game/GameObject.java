@@ -7,11 +7,12 @@ public class GameObject {
     public GameObject() {
     }
 
-    public GameObject(float x, float y, float width, float height, ImageResource imageResource) {
+    public GameObject(float x, float y, float width, float height, ImageResource imageResource, float rotation) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.rotation = rotation;
         this.imageResource = imageResource;
     }
 
