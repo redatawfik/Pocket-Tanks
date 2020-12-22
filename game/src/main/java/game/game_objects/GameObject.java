@@ -1,4 +1,7 @@
-package game;
+package game.game_objects;
+
+import game.GameDisplay;
+import game.ImageResource;
 
 public class GameObject {
     private float x = 1, y = 1, width = 5, height = 5, rotation = 0;

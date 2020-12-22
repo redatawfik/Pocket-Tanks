@@ -139,7 +139,7 @@ public class GameDisplay implements GLEventListener {
 
     public void drawGround(float[] mesh) {
 
-        gl.glColor3f(0, 1, 1);
+        gl.glColor3f(0/256.f, 46/256.f, 13/256.f);
 
         for (int i = 0; i < mesh.length - 1; i++) {
             gl.glBegin(GL2.GL_POLYGON);

@@ -1,6 +1,6 @@
 package game.action;
 
-import game.Tank;
+import game.game_objects.Tank;
 import game.World;
 
 public class EnemyAction implements Action {
@@ -22,6 +22,8 @@ public class EnemyAction implements Action {
     @Override
     public void shoot() {
         tank.shoot();
+
+        World.getInstance().setMyTurn(true);
     }
 
     @Override

@@ -15,6 +15,13 @@ class Chat implements MessageComponentInterface {
         // Store the new connection to send messages to later
         $this->clients->attach($conn);
 
+        $side = "left";
+        foreach ($this->clients as $client) {
+            // The sender is not the receiver, send to each client connected
+            $client->send($side);
+            $side = "right";
+        }
+
         echo "New connection! ({$conn->resourceId})\n";
     }
 

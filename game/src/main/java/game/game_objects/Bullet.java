@@ -1,4 +1,8 @@
-package game;
+package game.game_objects;
+
+import game.BulletDestructor;
+import game.GameDisplay;
+import game.ImageResource;
 
 public class Bullet extends GameObject {
 

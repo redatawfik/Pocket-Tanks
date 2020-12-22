@@ -1,5 +1,7 @@
-package game;
+package game.game_objects;
 
+
+import game.GameDisplay;
 
 import java.util.Arrays;
 
