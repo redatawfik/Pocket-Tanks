@@ -21,6 +21,7 @@ public class GameDisplay implements GLEventListener {
     private long elapsedSeconds;
     private int elapsedNanos;
     int frames = 0;
+    private GLCanvas canvas;
 
     private GameDisplay() {
     }
@@ -149,5 +150,13 @@ public class GameDisplay implements GLEventListener {
             gl.glVertex2d(i, 0);
             gl.glEnd();
         }
+    }
+
+    public void setCanvas(GLCanvas glCanvas) {
+        canvas = glCanvas;
+    }
+
+    public GLCanvas getCanvas() {
+        return canvas;
     }
 }

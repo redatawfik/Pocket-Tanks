@@ -4,6 +4,8 @@ package game;
 import game.game_objects.Ground;
 import game.game_objects.Tank;
 
+import java.util.Random;
+
 public class World {
 
     private static World instance;
@@ -20,6 +22,8 @@ public class World {
         int tY = 10;
         leftTank = new Tank(tX, tY, "m1.png", -45);
         rightTank = new Tank(tX + 65, tY, "m1.png", -135);
+
+        setMeLeft();
     }
 
     public static World getInstance() {

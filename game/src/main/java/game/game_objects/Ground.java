@@ -3,7 +3,7 @@ package game.game_objects;
 
 import game.GameDisplay;
 
-import java.util.Arrays;
+import java.util.Random;
 
 public class Ground {
     private static Ground instance;
@@ -24,36 +24,33 @@ public class Ground {
 
     private void generateMesh() {
 
-        Arrays.fill(mesh, 20.0f);
-        /*
-        float STEP_MAX = 1f;
-        float STEP_CHANGE = 1;
-        float MAX_HEIGHT = 40;
-
-        float height = (float) ((Math.random() * MAX_HEIGHT / 3) + 2 * MAX_HEIGHT / 3);
-        float slope = (float) ((Math.random() * STEP_MAX) * 2 - STEP_MAX);
-
         for (int i = 0; i < mesh.length; i++) {
-            height += slope;
-            slope += (Math.random() * STEP_CHANGE) * 2 - STEP_CHANGE;
 
-            if (slope > STEP_MAX) slope = STEP_MAX;
-            if (slope < -STEP_MAX) slope = -STEP_MAX;
+            float sd = 4f;
+            float yy = 0;
+            Random random = new Random();
 
-            if (height > 0.75 * MAX_HEIGHT) {
-                height = (float) (0.75 * MAX_HEIGHT);
-                slope *= -1;
+            if (i < 50) {
+                yy = (float) (30 / (1 + Math.pow(Math.E, -(i * .2 - 5)))) + 10;
+            } else {
+                yy = (float) (-30 / (1 + Math.pow(Math.E, -(i * .2 - 15)))) + 50;
             }
 
-            if (height > 0.4 * MAX_HEIGHT) {
-                height = (float) (0.4 * MAX_HEIGHT);
-                slope *= -1;
-            }
+            // System.out.println("X: " + i + "  Y: " + yy);
+            mesh[i] = yy;
 
-            mesh[i] = height;
+            for (int j = 1; j < mesh.length - 1; j++) {
+                float ff = (float) (random.nextGaussian() * sd + mesh[j]);
+
+                if (i % 5 == 0) {
+                    mesh[j] = ff;
+                } else {
+                    mesh[j] = (mesh[j - 1] + mesh[j + 1]) / 2;
+                }
+            }
         }
 
-         */
+
     }
 
     public float[] getMesh() {

@@ -71,6 +71,17 @@ public class Tank extends GameObject implements BulletDestructor {
         if (bullet != null) {
             bullet.update();
         }
+
+        int startX = (int) (getX() - getWidth());
+        int endX = (int) (getX() + getWidth());
+
+        float[] mesh = Ground.getInstance().getMesh();
+
+        float startY = mesh[startX];
+        float endY = mesh[endX];
+
+        float angel = (float) Math.atan((endY - startY) / (endX - startX));
+        setRotation((float) Math.toDegrees(-angel));
     }
 
     public void shoot() {

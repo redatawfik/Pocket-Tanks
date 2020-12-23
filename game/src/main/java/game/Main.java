@@ -8,5 +8,7 @@ public class Main {
         game.start();
 
         Connection.getInstance();
+
+//        Menu menu = new Menu();
     }
 }

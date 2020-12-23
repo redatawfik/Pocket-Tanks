@@ -1,7 +1,6 @@
 package game.game_objects;
 
 import game.BulletDestructor;
-import game.GameDisplay;
 import game.ImageResource;
 
 public class Bullet extends GameObject {
@@ -31,8 +30,8 @@ public class Bullet extends GameObject {
 
     private void shoot() {
 
-        float deltaTime = GameDisplay.getInstance().getDeltaTime();
-        time += deltaTime;
+        //float deltaTime = GameDisplay.getInstance().getDeltaTime();
+        time += .018;
 
         float velX = (float) (initialVelocity * Math.cos(angel));
         float velY = (float) (initialVelocity * Math.sin(angel));
@@ -42,7 +41,7 @@ public class Bullet extends GameObject {
         float x = velX * time + initialX;
         float y = (float) (currVelo * time + initialY + .5 * g * Math.pow(time, 2));
 
-        System.out.println("X: " + x + "   Y: " + y);
+        //System.out.println("X: " + x + "   Y: " + y);
         setX(x);
         setY(y);
 

@@ -7,6 +7,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class Game extends JFrame {
 
@@ -33,6 +34,8 @@ public class Game extends JFrame {
         //GLCanvas glCanvas = new GLCanvas();
         glCanvas.addGLEventListener(display);
         glCanvas.addKeyListener(new KeyInput());
+
+        display.setCanvas(glCanvas);
 
         //create the animator
         animator = new FPSAnimator(glCanvas, 60);

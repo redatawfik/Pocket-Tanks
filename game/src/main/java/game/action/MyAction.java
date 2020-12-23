@@ -1,7 +1,7 @@
 package game.action;
 
-import game.game_objects.Tank;
 import game.World;
+import game.game_objects.Tank;
 import game.websocket.Connection;
 
 public class MyAction implements Action {
@@ -24,10 +24,14 @@ public class MyAction implements Action {
 
     @Override
     public void shoot() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.shoot();
-        connection.sendMessage(Action.SHOOT);
+
+        try {
+            connection.sendMessage(Action.SHOOT);
+        } catch (Error ignored) {
+        }
 
         World.getInstance().setMyTurn(false);
     }
