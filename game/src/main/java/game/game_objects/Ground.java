@@ -2,6 +2,7 @@ package game.game_objects;
 
 
 import game.GameDisplay;
+import game.websocket.Connection;
 
 import java.util.Random;
 
@@ -9,20 +10,21 @@ public class Ground {
     private static Ground instance;
 
     private final float[] mesh;
+    private int finishedCells;
 
     private Ground() {
         this.mesh = new float[110];
-        generateMesh();
+        System.out.println("created a new mesh");
     }
 
     public static Ground getInstance() {
         if (instance == null)
             instance = new Ground();
+
         return instance;
     }
 
-
-    private void generateMesh() {
+    public void generateMap() {
 
         for (int i = 0; i < mesh.length; i++) {
 
@@ -36,7 +38,6 @@ public class Ground {
                 yy = (float) (-30 / (1 + Math.pow(Math.E, -(i * .2 - 15)))) + 50;
             }
 
-            // System.out.println("X: " + i + "  Y: " + yy);
             mesh[i] = yy;
 
             for (int j = 1; j < mesh.length - 1; j++) {
@@ -49,8 +50,6 @@ public class Ground {
                 }
             }
         }
-
-
     }
 
     public float[] getMesh() {
@@ -78,5 +77,26 @@ public class Ground {
         for (int i = (int) (x - 4), y = 0; i <= x + 4; i++, y++) {
             mesh[i] -= min[y];
         }
+    }
+
+    public void setYAtX(int x, float y) {
+        mesh[x] = y;
+        finishedCells++;
+//        System.out.println("===================================================================");
+//        System.out.println(mesh);
+    }
+
+    public void sendMapToGuest() {
+        for (int i = 0; i < mesh.length; i++) {
+            Connection.getInstance().sendMessage("MAP " + i + " " + mesh[i]);
+        }
+    }
+
+    public boolean finishBuildingMap() {
+        return finishedCells == mesh.length;
+    }
+
+    public int getSetMesh() {
+        return finishedCells;
     }
 }

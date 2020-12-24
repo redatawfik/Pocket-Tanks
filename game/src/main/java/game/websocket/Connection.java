@@ -4,9 +4,10 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
-import game.World;
+import game.Main;
 import game.action.Action;
 import game.action.EnemyAction;
+import game.game_objects.Ground;
 
 import java.io.IOException;
 
@@ -40,7 +41,6 @@ public class Connection {
     }
 
     private void receivedMessage(String message) {
-        //System.out.println(message);
         if (message.equals(Action.SHOOT)) {
             EnemyAction.getInstance().shoot();
         } else if (message.equals(Action.MOVE_LEFT)) {
@@ -51,10 +51,15 @@ public class Connection {
             EnemyAction.getInstance().canonUp();
         } else if (message.equals(Action.CANON_DOWN)) {
             EnemyAction.getInstance().canonDown();
-        } else if(message.equals("left")) {
-            World.getInstance().setMeLeft();
-        }else if(message.equals("right")) {
-            World.getInstance().setMeRight();
+        } else if (message.equals("left")) {
+            Main.initializeHostGame();
+        } else if (message.equals("right")) {
+            Main.initializeGuestGame();
+        } else if (message.contains("MAP")) {
+            String[] arr = message.split(" ");
+            int x = Integer.parseInt(arr[1]);
+            float y = Float.parseFloat(arr[2]);
+            Ground.getInstance().setYAtX(x, y);
         }
     }
 

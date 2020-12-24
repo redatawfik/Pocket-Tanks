@@ -91,11 +91,8 @@ public class GameDisplay implements GLEventListener {
             gl.glBindTexture(GL2.GL_TEXTURE_2D, texture.getTextureObject());
         }
 
-
         gl.glTranslatef(x, y, 0);
         gl.glRotated(-rotation, 0, 0, 1);
-
-        //gl.glColor4f(1, 0, 0, .6f);
 
         gl.glColor4f(1, 1, 1, 1);
         gl.glBegin(GL2.GL_QUADS);
@@ -140,7 +137,8 @@ public class GameDisplay implements GLEventListener {
 
     public void drawGround(float[] mesh) {
 
-        gl.glColor3f(0/256.f, 46/256.f, 13/256.f);
+        //System.out.println(mesh);
+        gl.glColor3f(0 / 256.f, 46 / 256.f, 13 / 256.f);
 
         for (int i = 0; i < mesh.length - 1; i++) {
             gl.glBegin(GL2.GL_POLYGON);

@@ -1,7 +1,7 @@
 package game.action;
 
-import game.game_objects.Tank;
 import game.World;
+import game.game_objects.Tank;
 
 public class EnemyAction implements Action {
 

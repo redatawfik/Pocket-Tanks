@@ -41,7 +41,6 @@ public class Bullet extends GameObject {
         float x = velX * time + initialX;
         float y = (float) (currVelo * time + initialY + .5 * g * Math.pow(time, 2));
 
-        //System.out.println("X: " + x + "   Y: " + y);
         setX(x);
         setY(y);
 
