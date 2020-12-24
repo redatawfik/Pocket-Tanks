@@ -6,30 +6,58 @@ class User
     private $id;
     private $email;
     private $username;
-    private $birthday;
-    private $passwdhash;
+    private $score;
+    private $matches;
+    private $imageURL;
+
 
     /**
-     * @param mixed $passwdhash
-     */
-    public function setPasswdhash($passwdhash): void
-    {
-        $this->passwdhash = $passwdhash;
+     * remember to delete this function that prints user
+     * */
+    public function printUser(){
+        //print_r($this->getId());
+        echo "id: " . $this->getId() . "</br>".
+            "Email: " . $this->getEmail() . "</br>".
+            "Username: " . $this->getUsername() . "</br>".
+            "Score: " . $this->getScore() .  "</br>".
+            "ImageUrl: " . $this->getImageURL() . "</br>";
+    }
+    /**
+     * return json representation for this user
+    */
+    public function toJson(){
+        header('Content-Type: application/json');
+        $values = array("id" => $this->id,
+            "userName" => $this->getUsername(),
+            "email" => $this->getEmail(),
+            "score" => $this->getScore(),
+            "imageUrl" => $this->getImageURL());
+        return json_encode($values);
     }
 
     /**
-     * @return mixed
+     * multi params constructor
+     * @param $id
+     * @param $email
+     * @param $username
+     * @return User
      */
-    public function getPasswdhash()
-    {
-        return $this->passwdhash;
+    public static function Build($id, $email, $username){
+        $instance = new self();
+        $instance->setId($id);
+        $instance->setUsername($username);
+        $instance->setEmail($email);
+        return $instance;
     }
 
-    /**
-     * Employee constructor.
-     */
-    public function __construct()
-    {
+    public static function buildWithAll($id, $email, $username, $score, $imageUrl){
+        $instance = new self();
+        $instance->setId($id);
+        $instance->setUsername($username);
+        $instance->setEmail($email);
+        $instance->setScore($score);
+        $instance->setImageURL($imageUrl);
+        return $instance;
     }
 
     /**
@@ -41,43 +69,11 @@ class User
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return mixed
      */
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     /**
@@ -89,6 +85,46 @@ class User
     }
 
     /**
+     * @return mixed
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMatches()
+    {
+        return $this->matches;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageURL()
+    {
+        return $this->imageURL;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
      * @param mixed $username
      */
     public function setUsername($username)
@@ -97,18 +133,28 @@ class User
     }
 
     /**
-     * @return mixed
+     * @param mixed $score
      */
-    public function getBirthday()
+    public function setScore($score)
     {
-        return $this->birthday;
+        $this->score = $score;
     }
 
     /**
-     * @param mixed $birthday
+     * @param mixed $matches
      */
-    public function setBirthday($birthday)
+    public function setMatches($matches)
     {
-        $this->birthday = $birthday;
+        $this->matches = $matches;
     }
+
+    /**
+     * @param mixed $imageURL
+     */
+    public function setImageURL($imageURL)
+    {
+        $this->imageURL = $imageURL;
+    }
+
+
 }
