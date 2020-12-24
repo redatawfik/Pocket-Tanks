@@ -1,40 +1,20 @@
 package game;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class Menu extends JFrame {
+public class Menu extends JPanel {
 
     public Menu() {
-        //set the JFrame title
-        super("Pocket Tanks");
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JButton button = new JButton();
-        button.setText("Start");
+        JButton button = new JButton("Start");
         button.addActionListener(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                        Game game = new Game();
-                        game.start();
-                        setVisible(false);
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MenuCallback.getInstance().startOnlineGame();
+            }
         });
 
-        getContentPane().add(button, BorderLayout.CENTER);
-        setSize(500, 300);
-
-        //getContentPane().removeAll();
-        //this.setResizable(false);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        // pack();
-
-        //center the JFrame on the screen
-
-            setVisible(true);
+        this.add(button);
     }
 
 }

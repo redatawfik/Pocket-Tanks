@@ -6,70 +6,35 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class Game extends JFrame {
+public class Game extends GLCanvas {
+
+    private static Game instance;
 
     public static FPSAnimator animator = null;
     private static GLProfile profile;
 
+    public static Game getInstance() {
+        if (instance == null) {
+            profile = GLProfile.get(GLProfile.GL2);
+            GLCapabilities capabilities = new GLCapabilities(profile);
+            instance = new Game(capabilities, GameDisplay.getInstance());
+        }
 
-    public Game() {
-        //set the JFrame title
-        super("Pocket Tanks");
-
-        //kill the process when the JFrame is closed
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //we'll create our GLEventListener
-        GameDisplay display = GameDisplay.getInstance();
-        //display.addGameObject(Tank.getInstance());
-
-        //Now we will create our GLCanvas
-        profile = GLProfile.get(GLProfile.GL2);
-        GLCapabilities capabilities = new GLCapabilities(profile);
-        final GLCanvas glCanvas = new GLCanvas(capabilities);
-
-        //GLCanvas glCanvas = new GLCanvas();
-        glCanvas.addGLEventListener(display);
-        glCanvas.addKeyListener(new KeyInput());
-
-        display.setCanvas(glCanvas);
-
-        //create the animator
-        animator = new FPSAnimator(glCanvas, 60);
-
-        getContentPane().add(glCanvas, BorderLayout.CENTER);
-        setSize(500, 300);
-
-        //this.setResizable(false);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-       // pack();
-
-        //center the JFrame on the screen
-        centerWindow(this);
+        return instance;
     }
 
-    public void centerWindow(Component frame) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension frameSize = frame.getSize();
-        if (frameSize.width > screenSize.width)
-            frameSize.width = screenSize.width;
-        if (frameSize.height > screenSize.height)
-            frameSize.height = screenSize.height;
-        frame.setLocation(
-                (screenSize.width - frameSize.width) >> 1,
-                (screenSize.height - frameSize.height) >> 1
-        );
+    private Game(GLCapabilities capabilities, GameDisplay display) {
+        super(capabilities);
+
+        addGLEventListener(display);
+        addKeyListener(new KeyInput());
+
+        //create the animator
+        animator = new FPSAnimator(this, 60);
     }
 
     public void start() {
-
-        SwingUtilities.invokeLater(
-                () -> setVisible(true)
-        );
-
         SwingUtilities.invokeLater(
                 () -> animator.start()
         );

@@ -22,3 +22,5 @@
 
 /game/target/
 /game/.idea/
+
+/websocket/php-socket/.idea/

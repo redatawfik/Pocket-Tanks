@@ -1,7 +1,6 @@
 package game.game_objects;
 
 
-import game.BulletDestructor;
 import game.ImageResource;
 
 public class Tank extends GameObject implements BulletDestructor {

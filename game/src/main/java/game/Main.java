@@ -1,21 +1,14 @@
 package game;
 
 import game.game_objects.Ground;
-import game.websocket.Connection;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Main {
 
-
     public static void main(String[] args) {
-        //Game game = new Game();
-        //game.start();
-
-        Connection.getInstance();
-
-//        Menu menu = new Menu();
+        GameFrame.getInstance();
     }
 
     public static void initializeGuestGame() {
@@ -27,7 +20,9 @@ public class Main {
                 if (Ground.getInstance().finishBuildingMap()) {
                     World.getInstance().setMeRight();
 
-                    Game game = new Game();
+                    Game game = Game.getInstance();
+
+                    GameFrame.getInstance().changeDisplayToGame(game);
                     game.start();
                     timer.cancel();
                 }
@@ -41,7 +36,9 @@ public class Main {
 
         World.getInstance().setMeLeft();
 
-        Game game = new Game();
+        Game game = Game.getInstance();
+
+        GameFrame.getInstance().changeDisplayToGame(game);
         game.start();
     }
 }
