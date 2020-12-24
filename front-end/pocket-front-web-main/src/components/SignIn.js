@@ -8,14 +8,20 @@ export default memo(function SignIn() {
     const [email , setemail] = useState('');
     const [pass , setpass] = useState('')
     async function handleSubmit() {
-        const {data} = await axios.post("http://localhost:63342/web-api/src/api/login.php" , {
+        const {data, status} = await axios.post("http://localhost:63342/web-api/src/api/login.php" , {
             email,
             password : pass
         })
-        if(data.status == "ok") {
-            console.log(data)
-
+        if(status == "200" && data['Status'] !== 'Error') {
+            alert('userid is ' + data['id'] + '\n' + 
+            'username is ' + data['username'] + '\n'+
+            'email is ' + data['email']);
+            console.log(data);
             history.push('/')
+        }
+        else{
+            console.log(data);
+            alert(data['Msg']);
         }
     }
     return (
