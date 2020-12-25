@@ -1,12 +1,14 @@
 package game;
 
 import com.jogamp.opengl.awt.GLCanvas;
+import game.game_objects.Tank;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameFrame extends JFrame {
     private static GameFrame instance;
+    private ControlPanel controlPanel;
 
     private GameFrame() {
         SwingUtilities.invokeLater(
@@ -51,10 +53,25 @@ public class GameFrame extends JFrame {
     public void changeDisplayToGame(GLCanvas canvas) {
         getContentPane().removeAll();
 
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new GridLayout(2, 1));
+
+        controlPanel = ControlPanel.getInstance();
+
         panel.add(canvas);
+        panel.add(controlPanel);
+
 
         getContentPane().add(panel);
+
+        updateControlPanel();
+
         revalidate();
+    }
+
+    public void updateControlPanel() {
+        Tank tank = World.getInstance().getMyTank();
+        controlPanel.setPower(tank.getPower());
+        controlPanel.setAngel(tank.getAngel());
+        controlPanel.setNumOfMoves(tank.getMoves());
     }
 }

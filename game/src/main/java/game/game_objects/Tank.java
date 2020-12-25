@@ -11,6 +11,7 @@ public class Tank extends GameObject implements BulletDestructor {
     private int moves = 5;
     private int leftMoves;
     private int rightMoves;
+    private int power = 40;
 
     public Tank(float x, float y, String canonImage, float angel) {
         this.canon = new GameObject(x + .5f, y - .1f, 5, 5,
@@ -84,15 +85,17 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void shoot() {
-        bullet = new Bullet(canon.getRotation(), getX(), getY(), 30, this);
+        bullet = new Bullet(canon.getRotation(), getX(), getY(), power, this);
     }
 
     public void moveLeft() {
+        if(moves <= 0)return;
         if (leftMoves != 0 || rightMoves != 0) return;
         leftMoves = 150;
     }
 
     public void moveRight() {
+        if(moves <= 0)return;
         if (leftMoves != 0 || rightMoves != 0) return;
         rightMoves = 150;
         moves--;
@@ -109,5 +112,13 @@ public class Tank extends GameObject implements BulletDestructor {
     @Override
     public void destroy() {
         bullet = null;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public int getAngel() {
+        return (int) canon.getRotation();
     }
 }

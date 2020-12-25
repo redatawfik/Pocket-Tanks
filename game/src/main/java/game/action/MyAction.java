@@ -1,5 +1,6 @@
 package game.action;
 
+import game.GameFrame;
 import game.World;
 import game.game_objects.Tank;
 import game.websocket.Connection;
@@ -42,6 +43,7 @@ public class MyAction implements Action {
 
         tank.moveLeft();
         connection.sendMessage(Action.MOVE_LEFT);
+        GameFrame.getInstance().updateControlPanel();
     }
 
     @Override
@@ -50,6 +52,7 @@ public class MyAction implements Action {
 
         tank.moveRight();
         connection.sendMessage(Action.MOVE_RIGHT);
+        GameFrame.getInstance().updateControlPanel();
     }
 
     @Override
@@ -58,6 +61,7 @@ public class MyAction implements Action {
 
         tank.canonUp();
         connection.sendMessage(Action.CANON_UP);
+        GameFrame.getInstance().updateControlPanel();
     }
 
     @Override
@@ -66,5 +70,6 @@ public class MyAction implements Action {
 
         tank.canonDown();
         connection.sendMessage(Action.CANON_DOWN);
+        GameFrame.getInstance().updateControlPanel();
     }
 }
