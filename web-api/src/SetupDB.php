@@ -21,21 +21,19 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 
 //add tables
-$db_name = "pocket_tank";
-$conn = new mysqli($db_hostname, $db_username, $db_password, $db_name);
-$sql = "CREATE TABLE users (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-username VARCHAR(30) NOT NULL,
-email VARCHAR(245) NOT NULL,
-passwordhash VARCHAR(128),
-birthdate DATE NOT NULL
-)";
+$mysql_host = "localhost";
+$mysql_database = "pocket_tank";
+$mysql_user = "root";
+$mysql_password = "";
+# MySQL with PDO_MYSQL
+$db = new PDO("mysql:host=$mysql_host;dbname=$mysql_database", $mysql_user, $mysql_password);
 
+$query = file_get_contents("pocket_tank.sql");
 
-if ($conn->query($sql) === TRUE) {
-    echo "Table Users created successfully";
-} else {
-    echo "Error creating table: " . $conn->error;
+$stmt = $db->prepare($query);
+
+if ($stmt->execute()){
+    echo "Success";
+}else{
+    echo "Fail";
 }
-
-$conn->close();

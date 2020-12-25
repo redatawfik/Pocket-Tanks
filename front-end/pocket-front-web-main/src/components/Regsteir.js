@@ -15,8 +15,12 @@ export default memo(function Regsteir() {
             password : pass
         })
         if(status == "201") {
-            console.log("data")
+            alert("Sucess, Process to login");
             history.push('/')
+        }
+        else{
+            
+            alert(data['Msg']);
         }
     }
     return (

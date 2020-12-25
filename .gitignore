@@ -20,7 +20,12 @@
 /front-end/pocket-front-web-main/yarn-debug.log*
 /front-end/pocket-front-web-main/yarn-error.log*
 
+<<<<<<< HEAD
 /game/target/
 /game/.idea/
 
 /websocket/php-socket/.idea/
+=======
+#ide
+/web-api/.idea
+>>>>>>> a13c7babd212f2c9abc2882e26951c7705fd57d9
