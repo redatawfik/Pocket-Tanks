@@ -67,6 +67,10 @@ public class Menu extends JPanel implements ActionListener {
         return instance;
     }
 
+    public static void destroy() {
+        instance = null;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

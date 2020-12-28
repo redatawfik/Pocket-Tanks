@@ -1,4 +1,4 @@
-package game.websocket;
+package game.networking;
 
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
@@ -12,11 +12,11 @@ import game.game_objects.Ground;
 
 import java.io.IOException;
 
-public class Connection {
-    private static Connection connection;
+public class Socket {
+    private static Socket socket;
     private WebSocket websocket;
 
-    private Connection() {
+    private Socket() {
         connect();
     }
 
@@ -70,12 +70,12 @@ public class Connection {
         }
     }
 
-    public static Connection getInstance() {
-        if (connection == null) {
-            connection = new Connection();
+    public static Socket getInstance() {
+        if (socket == null) {
+            socket = new Socket();
         }
 
-        return connection;
+        return socket;
     }
 
 }

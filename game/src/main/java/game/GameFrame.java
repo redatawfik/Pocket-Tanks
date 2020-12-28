@@ -18,6 +18,7 @@ public class GameFrame extends JFrame implements LineListener {
 
     private final String MENU_MUSIC_PATH = "/start-music.au";
     private final String GAME_MUSIC_PATH = "/back-music.au";
+    private JPanel gamePanel;
 
     private GameFrame() {
         SwingUtilities.invokeLater(
@@ -29,6 +30,8 @@ public class GameFrame extends JFrame implements LineListener {
 
     private void init() {
         setTitle("Pocket Tanks");
+
+        //removeAll();
 
         //kill the process when the JFrame is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,8 +67,7 @@ public class GameFrame extends JFrame implements LineListener {
     public void changeDisplayToGame(GLCanvas canvas) {
         getContentPane().removeAll();
 
-
-        JPanel panel = new JPanel(new BorderLayout());
+        gamePanel = new JPanel(new BorderLayout());
 
         //BoxLayout layoutMgr = new BoxLayout(panel, BoxLayout.X_AXIS);
         //panel.setLayout(layoutMgr);
@@ -73,11 +75,11 @@ public class GameFrame extends JFrame implements LineListener {
         controlPanel = ControlPanel.getInstance();
 
         //canvas.setPreferredSize(new Dimension(getWindowWidth(), getWindowHeight()));
-        panel.add(canvas);
-        panel.add(controlPanel, BorderLayout.SOUTH);
+        gamePanel.add(canvas);
+        gamePanel.add(controlPanel, BorderLayout.SOUTH);
 
 
-        getContentPane().add(panel);
+        getContentPane().add(gamePanel);
 
         updateControlPanel();
 
@@ -85,6 +87,24 @@ public class GameFrame extends JFrame implements LineListener {
 
         Sound.playBackgroundSound(GAME_MUSIC_PATH);
     }
+
+    public void changeDisplayToMenu() {
+        World.destroy();
+
+        getContentPane().removeAll();
+
+
+
+        getContentPane().add(Menu.getInstance());
+
+        revalidate();
+        repaint();
+        pack();
+
+        Sound.playBackgroundSound(MENU_MUSIC_PATH);
+      //  init();
+    }
+
 
     public void showLoadingSpinner() {
         getContentPane().removeAll();

@@ -2,7 +2,7 @@ package game.game_objects;
 
 
 import game.GameDisplay;
-import game.websocket.Connection;
+import game.networking.Socket;
 
 import java.util.Random;
 
@@ -88,7 +88,7 @@ public class Ground {
 
     public void sendMapToGuest() {
         for (int i = 0; i < mesh.length; i++) {
-            Connection.getInstance().sendMessage("MAP " + i + " " + mesh[i]);
+            Socket.getInstance().sendMessage("MAP " + i + " " + mesh[i]);
         }
     }
 
@@ -98,5 +98,9 @@ public class Ground {
 
     public int getSetMesh() {
         return finishedCells;
+    }
+
+    public void destroy() {
+        instance = null;
     }
 }

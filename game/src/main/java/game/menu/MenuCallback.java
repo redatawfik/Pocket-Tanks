@@ -1,9 +1,7 @@
 package game.menu;
 
 import game.GameFrame;
-import game.websocket.Connection;
-
-import java.awt.event.WindowEvent;
+import game.networking.Socket;
 
 public class MenuCallback {
     private static MenuCallback instance;
@@ -15,7 +13,7 @@ public class MenuCallback {
     }
 
     public void startOnlineGame() {
-        Connection.getInstance();
+        Socket.getInstance();
         GameFrame.getInstance().showLoadingSpinner();
     }
 
