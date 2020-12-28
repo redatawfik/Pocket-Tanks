@@ -25,13 +25,12 @@ class Match
      * @param $looser_score
      * @return Match
      */
-    public static function Build($id,
+    public static function Build(
                                  $winner_id,
                                  $looser_id,
                                  $winner_score,
                                  $looser_score){
         $instance = new self();
-        $instance->setId($id);
         $instance->setWinnerId($winner_id);
         $instance->setLooserId($looser_id);
         $instance->setWinnerScore($winner_score);
