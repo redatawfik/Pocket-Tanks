@@ -34,10 +34,14 @@ class userDao extends dbContext
 
         $result = $mysqlExecutor->get_result();
         if(!$result) return null;
-        $result =  $result->fetch_all()[0];
-        $user = User::Build($result[0], $result[2], $result[1]);
-        $this->connection->close();
-        return $user;
+        $xx = $result->fetch_all();
+        if(!empty($xx)) {
+            $result = $xx[0];
+            $user = User::Build($result[0], $result[2], $result[1]);
+            $this->connection->close();
+            return $user;
+        }
+        return null;
     }
 
     public function getAll(){
