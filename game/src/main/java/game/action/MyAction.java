@@ -4,7 +4,10 @@ import game.GameFrame;
 import game.Sound;
 import game.World;
 import game.game_objects.Tank;
+import game.networking.Site;
 import game.networking.Socket;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MyAction implements Action {
 
@@ -94,7 +97,11 @@ public class MyAction implements Action {
     }
 
     public void endMatch() {
+        Tank tank1 = World.getInstance().getMyTank();
+        Tank tank2 = World.getInstance().getEnemyTank();
 
+        String text = "{\"user1\":\"test\",\"user2\":\"testt\",\"score1\":\"" + tank1.getScore() + "\",\"score2\":\"" + tank2.getScore() + "\"}";
+        Site.sendResult(text);
         GameFrame.getInstance().changeDisplayToMenu();
     }
 }
