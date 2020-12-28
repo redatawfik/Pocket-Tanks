@@ -19,7 +19,7 @@ public class MyAction implements Action {
         connection = Connection.getInstance();
     }
 
-    public static Action getInstance() {
+    public static MyAction getInstance() {
         if (instance == null)
             instance = new MyAction();
 
@@ -84,10 +84,16 @@ public class MyAction implements Action {
         GameFrame.getInstance().updateControlPanel();
     }
 
+
+
     @Override
     public void powerDown() {
         tank.powerDown();
         connection.sendMessage(Action.POWER_DOWN);
         GameFrame.getInstance().updateControlPanel();
+    }
+
+    public void endMatch() {
+        System.out.println("Connection closed");
     }
 }

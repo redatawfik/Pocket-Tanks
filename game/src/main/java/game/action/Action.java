@@ -8,6 +8,7 @@ public interface Action {
     String CANON_DOWN = "canon-down";
     String POWER_UP = "power-up";
     String POWER_DOWN = "power-down";
+    String CLOSE = "CLOSE";
 
     void shoot();
 
