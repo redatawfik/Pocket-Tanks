@@ -3,12 +3,17 @@ package game;
 import com.jogamp.opengl.awt.GLCanvas;
 import game.game_objects.Tank;
 
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements LineListener {
     private static GameFrame instance;
     private ControlPanel controlPanel;
+
+    private final String MENU_MUSIC_PATH = "/start-music.au";
+    private final String GAME_MUSIC_PATH = "/back-music.au";
 
     private GameFrame() {
         SwingUtilities.invokeLater(
@@ -29,7 +34,10 @@ public class GameFrame extends JFrame {
         setSize(800, 500);
         //center the JFrame on the screen
         centerWindow(this);
+
+        Sound.playBackgroundSound(MENU_MUSIC_PATH);
     }
+
 
     public void centerWindow(Component frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -66,6 +74,8 @@ public class GameFrame extends JFrame {
         updateControlPanel();
 
         revalidate();
+
+        Sound.playBackgroundSound(GAME_MUSIC_PATH);
     }
 
     public void updateControlPanel() {
@@ -73,5 +83,10 @@ public class GameFrame extends JFrame {
         controlPanel.setPower(tank.getPower());
         controlPanel.setAngel(tank.getAngel());
         controlPanel.setNumOfMoves(tank.getMoves());
+    }
+
+    @Override
+    public void update(LineEvent event) {
+
     }
 }

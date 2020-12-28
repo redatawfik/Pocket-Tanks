@@ -1,6 +1,7 @@
 package game.action;
 
 import game.GameFrame;
+import game.Sound;
 import game.World;
 import game.game_objects.Tank;
 import game.websocket.Connection;
@@ -10,6 +11,8 @@ public class MyAction implements Action {
     private static MyAction instance;
     private final Tank tank;
     private final Connection connection;
+
+    private final String SHOOTING_SOUND_PATH = "/bullet-sound.au";
 
     private MyAction() {
         tank = World.getInstance().getMyTank();
@@ -28,6 +31,7 @@ public class MyAction implements Action {
         if (!World.getInstance().isMyTurn()) return;
 
         tank.shoot();
+        Sound.playSound(SHOOTING_SOUND_PATH);
 
         try {
             connection.sendMessage(Action.SHOOT);
