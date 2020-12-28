@@ -1,6 +1,7 @@
 package game;
 
 
+import game.action.MyAction;
 import game.game_objects.Ground;
 import game.game_objects.Tank;
 
@@ -33,6 +34,11 @@ public class World {
         Ground.getInstance().destroy();
 
         instance = null;
+    }
+
+    public void checkEndOFGame() {
+        if(myTank.getBulletCounter()==0 && enemyTank.getBulletCounter()==0)
+            MyAction.getInstance().endMatch();
     }
 
     public Tank getMyTank() {
