@@ -13,6 +13,7 @@ public class Tank extends GameObject implements BulletDestructor {
     private int leftMoves;
     private int rightMoves;
     private int power = 40;
+    private int score;
 
     public Tank(float x, float y, String canonImage, float angel) {
         this.canon = new GameObject(x + .5f, y - .1f, 5, 5,
@@ -86,7 +87,7 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void shoot() {
-        bullet = new Bullet(canon.getRotation(), getX(), getY(), power, this);
+        bullet = new Bullet(canon.getRotation(), getX(), getY(), power, this, this);
     }
 
     public void moveLeft() {
@@ -124,6 +125,25 @@ public class Tank extends GameObject implements BulletDestructor {
         bullet = null;
     }
 
+    @Override
+    public void checkDamage(float bulletPosition) {
+        Tank tank1 = World.getInstance().getEnemyTank();
+        Tank tank2 = World.getInstance().getMyTank();
+
+        if(bulletPosition >= tank1.getX() - tank1.getWidth() && bulletPosition <= tank1.getX() + tank1.getWidth()) {
+            World.getInstance().getMyEnemy(tank1).scoreUp();
+        }
+
+        if(bulletPosition >= tank2.getX() - tank2.getWidth() && bulletPosition <= tank2.getX() + tank2.getWidth()) {
+            World.getInstance().getMyEnemy(tank2).scoreUp();
+        }
+    }
+
+    private void scoreUp() {
+        score += 5;
+        System.out.println(score);
+    }
+
     public int getPower() {
         return power;
     }
@@ -138,5 +158,13 @@ public class Tank extends GameObject implements BulletDestructor {
 
     public void powerDown() {
         power--;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

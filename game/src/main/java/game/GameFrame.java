@@ -2,11 +2,15 @@ package game;
 
 import com.jogamp.opengl.awt.GLCanvas;
 import game.game_objects.Tank;
+import game.menu.LoadingView;
+import game.menu.Menu;
 
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.net.URL;
 
 public class GameFrame extends JFrame implements LineListener {
     private static GameFrame instance;
@@ -14,6 +18,7 @@ public class GameFrame extends JFrame implements LineListener {
 
     private final String MENU_MUSIC_PATH = "/start-music.au";
     private final String GAME_MUSIC_PATH = "/back-music.au";
+    private JPanel gamePanel;
 
     private GameFrame() {
         SwingUtilities.invokeLater(
@@ -26,10 +31,12 @@ public class GameFrame extends JFrame implements LineListener {
     private void init() {
         setTitle("Pocket Tanks");
 
+        //removeAll();
+
         //kill the process when the JFrame is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        getContentPane().add(new Menu());
+        getContentPane().add(Menu.getInstance());
 
         setSize(800, 500);
         //center the JFrame on the screen
@@ -37,7 +44,6 @@ public class GameFrame extends JFrame implements LineListener {
 
         Sound.playBackgroundSound(MENU_MUSIC_PATH);
     }
-
 
     public void centerWindow(Component frame) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -61,21 +67,50 @@ public class GameFrame extends JFrame implements LineListener {
     public void changeDisplayToGame(GLCanvas canvas) {
         getContentPane().removeAll();
 
-        JPanel panel = new JPanel(new GridLayout(2, 1));
+        gamePanel = new JPanel(new BorderLayout());
+
+        //BoxLayout layoutMgr = new BoxLayout(panel, BoxLayout.X_AXIS);
+        //panel.setLayout(layoutMgr);
 
         controlPanel = ControlPanel.getInstance();
 
-        panel.add(canvas);
-        panel.add(controlPanel);
+        //canvas.setPreferredSize(new Dimension(getWindowWidth(), getWindowHeight()));
+        gamePanel.add(canvas);
+        gamePanel.add(controlPanel, BorderLayout.SOUTH);
 
 
-        getContentPane().add(panel);
+        getContentPane().add(gamePanel);
 
         updateControlPanel();
 
         revalidate();
 
         Sound.playBackgroundSound(GAME_MUSIC_PATH);
+    }
+
+    public void changeDisplayToMenu() {
+        World.destroy();
+
+        getContentPane().removeAll();
+
+
+
+        getContentPane().add(Menu.getInstance());
+
+        revalidate();
+        repaint();
+        pack();
+
+        Sound.playBackgroundSound(MENU_MUSIC_PATH);
+      //  init();
+    }
+
+
+    public void showLoadingSpinner() {
+        getContentPane().removeAll();
+
+        getContentPane().add(LoadingView.getInstance());
+        revalidate();
     }
 
     public void updateControlPanel() {
@@ -89,4 +124,18 @@ public class GameFrame extends JFrame implements LineListener {
     public void update(LineEvent event) {
 
     }
+
+    public void close() {
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }
+
+    public int getWindowWidth() {
+        return getWidth();
+    }
+
+    public int getWindowHeight() {
+        return getHeight();
+    }
+
+
 }

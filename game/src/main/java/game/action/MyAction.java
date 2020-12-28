@@ -4,22 +4,22 @@ import game.GameFrame;
 import game.Sound;
 import game.World;
 import game.game_objects.Tank;
-import game.websocket.Connection;
+import game.networking.Socket;
 
 public class MyAction implements Action {
 
     private static MyAction instance;
     private final Tank tank;
-    private final Connection connection;
+    private final Socket socket;
 
     private final String SHOOTING_SOUND_PATH = "/bullet-sound.au";
 
     private MyAction() {
         tank = World.getInstance().getMyTank();
-        connection = Connection.getInstance();
+        socket = Socket.getInstance();
     }
 
-    public static Action getInstance() {
+    public static MyAction getInstance() {
         if (instance == null)
             instance = new MyAction();
 
@@ -34,7 +34,7 @@ public class MyAction implements Action {
         Sound.playSound(SHOOTING_SOUND_PATH);
 
         try {
-            connection.sendMessage(Action.SHOOT);
+            socket.sendMessage(Action.SHOOT);
         } catch (Error ignored) {
         }
 
@@ -46,7 +46,7 @@ public class MyAction implements Action {
         if(!World.getInstance().isMyTurn()) return;
 
         tank.moveLeft();
-        connection.sendMessage(Action.MOVE_LEFT);
+        socket.sendMessage(Action.MOVE_LEFT);
         GameFrame.getInstance().updateControlPanel();
     }
 
@@ -55,7 +55,7 @@ public class MyAction implements Action {
         if(!World.getInstance().isMyTurn()) return;
 
         tank.moveRight();
-        connection.sendMessage(Action.MOVE_RIGHT);
+        socket.sendMessage(Action.MOVE_RIGHT);
         GameFrame.getInstance().updateControlPanel();
     }
 
@@ -64,7 +64,7 @@ public class MyAction implements Action {
         if(!World.getInstance().isMyTurn()) return;
 
         tank.canonUp();
-        connection.sendMessage(Action.CANON_UP);
+        socket.sendMessage(Action.CANON_UP);
         GameFrame.getInstance().updateControlPanel();
     }
 
@@ -73,21 +73,28 @@ public class MyAction implements Action {
         if (!World.getInstance().isMyTurn()) return;
 
         tank.canonDown();
-        connection.sendMessage(Action.CANON_DOWN);
+        socket.sendMessage(Action.CANON_DOWN);
         GameFrame.getInstance().updateControlPanel();
     }
 
     @Override
     public void powerUp() {
         tank.powerUp();
-        connection.sendMessage(Action.POWER_UP);
+        socket.sendMessage(Action.POWER_UP);
         GameFrame.getInstance().updateControlPanel();
     }
+
+
 
     @Override
     public void powerDown() {
         tank.powerDown();
-        connection.sendMessage(Action.POWER_DOWN);
+        socket.sendMessage(Action.POWER_DOWN);
         GameFrame.getInstance().updateControlPanel();
+    }
+
+    public void endMatch() {
+
+        GameFrame.getInstance().changeDisplayToMenu();
     }
 }

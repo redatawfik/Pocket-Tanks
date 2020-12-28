@@ -54,6 +54,23 @@ class Match implements MessageComponentInterface
 
     public function onClose(ConnectionInterface $conn)
     {
+        foreach ($this->user_map as $match) {
+            $client1 = $match[0];
+            $client2 = $match[1];
+
+            if ($client1 === $conn) {
+                $client2->send("CLOSE");
+                echo sprintf('Connection %d sending message "%s" to %d other connection' . "\n"
+                    , $client1->resourceId, "CLOSE", $client2->resourceId);
+                break;
+            } else if ($client2 === $conn) {
+                $client1->send("CLOSE");
+                echo sprintf('Connection %d sending message "%s" to %d other connection' . "\n"
+                    , $client2->resourceId, "CLOSE", $client1->resourceId);
+                break;
+            }
+        }
+
         // The connection is closed, remove it, as we can no longer send it messages
         $this->clients->detach($conn);
         unset($this->user_map);

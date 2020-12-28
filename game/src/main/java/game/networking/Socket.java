@@ -1,4 +1,4 @@
-package game.websocket;
+package game.networking;
 
 import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
@@ -7,15 +7,16 @@ import com.neovisionaries.ws.client.WebSocketFactory;
 import game.Main;
 import game.action.Action;
 import game.action.EnemyAction;
+import game.action.MyAction;
 import game.game_objects.Ground;
 
 import java.io.IOException;
 
-public class Connection {
-    private static Connection connection;
+public class Socket {
+    private static Socket socket;
     private WebSocket websocket;
 
-    private Connection() {
+    private Socket() {
         connect();
     }
 
@@ -55,6 +56,8 @@ public class Connection {
             EnemyAction.getInstance().powerUp();
         } else if (message.equals(Action.POWER_DOWN)) {
             EnemyAction.getInstance().powerDown();
+        }else if (message.equals(Action.CLOSE)) {
+            MyAction.getInstance().endMatch();
         } else if (message.equals("left")) {
             Main.initializeHostGame();
         } else if (message.equals("right")) {
@@ -67,12 +70,12 @@ public class Connection {
         }
     }
 
-    public static Connection getInstance() {
-        if (connection == null) {
-            connection = new Connection();
+    public static Socket getInstance() {
+        if (socket == null) {
+            socket = new Socket();
         }
 
-        return connection;
+        return socket;
     }
 
 }

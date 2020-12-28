@@ -29,6 +29,12 @@ public class World {
         return instance;
     }
 
+    public static void destroy() {
+        Ground.getInstance().destroy();
+
+        instance = null;
+    }
+
     public Tank getMyTank() {
         return myTank;
     }
@@ -70,5 +76,21 @@ public class World {
 
     public boolean isRightPosition() {
         return myTank == rightTank;
+    }
+
+    public Tank getRightTank() {
+        return rightTank;
+    }
+
+    public Tank getLeftTank() {
+        return leftTank;
+    }
+
+    public Tank getMyEnemy(Tank tank) {
+        if (myTank == tank) {
+            return enemyTank;
+        } else {
+            return myTank;
+        }
     }
 }

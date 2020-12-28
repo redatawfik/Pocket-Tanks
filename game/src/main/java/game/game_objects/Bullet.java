@@ -1,6 +1,7 @@
 package game.game_objects;
 
 import game.ImageResource;
+import game.World;
 
 public class Bullet extends GameObject {
 
@@ -13,8 +14,9 @@ public class Bullet extends GameObject {
     private final float initialVelocity;
     private float time;
     private final float[] mesh;
+    private Tank source;
 
-    public Bullet(float angel, float initialX, float initialY, float initialVelocity, BulletDestructor destructor) {
+    public Bullet(float angel, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
         this.angel = -angel * DEG2RAD;
         this.initialX = initialX;
         this.initialY = initialY;
@@ -25,6 +27,7 @@ public class Bullet extends GameObject {
         this.setHeight(1f);
         mesh = Ground.getInstance().getMesh();
         setImageResource(new ImageResource("/bullet.png"));
+        this.source = tank;
     }
 
     private void shoot() {
@@ -52,6 +55,7 @@ public class Bullet extends GameObject {
 
         if (getY() <= mesh[(int) getX()]) {
             Ground.getInstance().destroyGround(getX());
+            destructor.checkDamage(getX());
             destructor.destroy();
         }
     }
