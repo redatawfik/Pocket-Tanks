@@ -8,6 +8,15 @@ public class Tank extends GameObject implements BulletDestructor {
 
     private final GameObject canon;
     private Bullet bullet;
+    private int bulletCounter = 10;
+
+    public int getBulletCounter() {
+        return bulletCounter;
+    }
+
+    public void setBulletCounter(int bulletCounter) {
+        this.bulletCounter = bulletCounter;
+    }
 
     private int moves = 5;
     private int leftMoves;
@@ -88,6 +97,9 @@ public class Tank extends GameObject implements BulletDestructor {
 
     public void shoot() {
         bullet = new Bullet(canon.getRotation(), getX(), getY(), power, this, this);
+        bulletCounter--;
+        World.getInstance().checkEndOFGame();
+
     }
 
     public void moveLeft() {
