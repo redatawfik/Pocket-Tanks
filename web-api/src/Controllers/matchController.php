@@ -26,9 +26,9 @@ class matchController extends Controller
     public function getUserMatches($id){
         return $this->matchService->getUserMatches($id);
     }
-    public function create($model)
+    public function create($match)
     {
-        // TODO: Implement create() method.
+        return $this->matchService->create($match);
     }
 
     public function update($model)

@@ -26,4 +26,8 @@ class matchesService
         return $this->matchDao->getUserMatches($id);
     }
 
+    public function create($match){
+        return $this->matchDao->create($match);
+    }
+
 }

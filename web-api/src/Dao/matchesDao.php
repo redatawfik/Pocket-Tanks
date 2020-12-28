@@ -35,7 +35,8 @@ class matchesDao extends dbContext
         $matchInfo = $mysqlExecutor->get_result();
         if(!$matchInfo) return null;
         $matchInfo =  $matchInfo->fetch_all()[0];
-        $match = Match::Build($matchInfo[0], $matchInfo[1], $matchInfo[2], $matchInfo[3], $matchInfo[4]);
+        $match = Match::Build($matchInfo[1], $matchInfo[2], $matchInfo[3], $matchInfo[4]);
+        $match->setId($matchInfo[0]);
         $this->connection->close();
         return $match;
     }
@@ -71,6 +72,22 @@ class matchesDao extends dbContext
 
         $this->connection->close();
         return $matches;
+    }
+
+    public function create($match){
+        $query = "INSERT INTO matches(winner_id, looser_id, winner_score, looser_score) VALUES (?, ?, ?, ?)";
+        $params = [$match->getWinnerId(),
+        $match->getLooserId(),
+        $match->getWinnerScore(),
+        $match->getLooserScore()];
+        $types = "iiii";
+        $mysqlExecutor =$this->mysqli_query_params($this->connection,
+            $query,
+            $params,
+            $types);
+        $mysqlExecutor->get_result();
+        $this->connection->close();
+        http_response_code(201);
     }
 
 
