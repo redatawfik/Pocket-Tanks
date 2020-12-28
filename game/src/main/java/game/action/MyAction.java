@@ -6,8 +6,6 @@ import game.World;
 import game.game_objects.Tank;
 import game.networking.Site;
 import game.networking.Socket;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MyAction implements Action {
 
