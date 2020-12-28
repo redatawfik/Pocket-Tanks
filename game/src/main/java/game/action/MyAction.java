@@ -70,10 +70,24 @@ public class MyAction implements Action {
 
     @Override
     public void canonDown() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.canonDown();
         connection.sendMessage(Action.CANON_DOWN);
+        GameFrame.getInstance().updateControlPanel();
+    }
+
+    @Override
+    public void powerUp() {
+        tank.powerUp();
+        connection.sendMessage(Action.POWER_UP);
+        GameFrame.getInstance().updateControlPanel();
+    }
+
+    @Override
+    public void powerDown() {
+        tank.powerDown();
+        connection.sendMessage(Action.POWER_DOWN);
         GameFrame.getInstance().updateControlPanel();
     }
 }

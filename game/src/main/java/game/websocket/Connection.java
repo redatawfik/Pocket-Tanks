@@ -51,6 +51,10 @@ public class Connection {
             EnemyAction.getInstance().canonUp();
         } else if (message.equals(Action.CANON_DOWN)) {
             EnemyAction.getInstance().canonDown();
+        } else if (message.equals(Action.POWER_UP)) {
+            EnemyAction.getInstance().powerUp();
+        } else if (message.equals(Action.POWER_DOWN)) {
+            EnemyAction.getInstance().powerDown();
         } else if (message.equals("left")) {
             Main.initializeHostGame();
         } else if (message.equals("right")) {

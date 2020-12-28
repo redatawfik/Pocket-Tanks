@@ -2,6 +2,7 @@ package game.game_objects;
 
 
 import game.ImageResource;
+import game.World;
 
 public class Tank extends GameObject implements BulletDestructor {
 
@@ -102,11 +103,20 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void canonUp() {
-        getCanon().setRotation(canon.getRotation() - .5f);
+        float delta = -.5f;
+        if ((World.getInstance().isMyTurn() && World.getInstance().isRightPosition()) ||
+                (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition()))
+            delta *= -1;
+        getCanon().setRotation(canon.getRotation() + delta);
     }
 
     public void canonDown() {
-        getCanon().setRotation(canon.getRotation() + .5f);
+        float delta = .5f;
+        if ((World.getInstance().isMyTurn() && World.getInstance().isRightPosition()) ||
+                (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition()))
+            delta *= -1;
+
+        getCanon().setRotation(canon.getRotation() + delta);
     }
 
     @Override
@@ -120,5 +130,13 @@ public class Tank extends GameObject implements BulletDestructor {
 
     public int getAngel() {
         return (int) canon.getRotation();
+    }
+
+    public void powerUp() {
+        power++;
+    }
+
+    public void powerDown() {
+        power--;
     }
 }

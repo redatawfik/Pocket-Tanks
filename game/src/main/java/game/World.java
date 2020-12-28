@@ -67,4 +67,8 @@ public class World {
     public void setMyTurn(boolean myTurn) {
         isMyTurn = myTurn;
     }
+
+    public boolean isRightPosition() {
+        return myTank == rightTank;
+    }
 }

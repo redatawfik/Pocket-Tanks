@@ -14,12 +14,18 @@ public class KeyInput implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
 
-        if (shouldMove && e.getKeyCode() == KeyEvent.VK_LEFT) {
+        if (shouldMove && e.getKeyCode() == KeyEvent.VK_A) {
             MyAction.getInstance().moveLeft();
             shouldMove = false;
-        } else if (shouldMove && e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        } else if (shouldMove && e.getKeyCode() == KeyEvent.VK_D) {
             MyAction.getInstance().moveRight();
             shouldMove = false;
+        }
+
+        if (shouldMove && e.getKeyCode() == KeyEvent.VK_LEFT) {
+            MyAction.getInstance().powerDown();
+        } else if (shouldMove && e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            MyAction.getInstance().powerUp();
         }
 
         if (e.getKeyCode() == KeyEvent.VK_UP) {

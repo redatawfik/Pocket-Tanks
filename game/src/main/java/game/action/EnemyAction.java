@@ -45,4 +45,14 @@ public class EnemyAction implements Action {
     public void canonDown() {
         tank.canonDown();
     }
+
+    @Override
+    public void powerDown() {
+        tank.powerDown();
+    }
+
+    @Override
+    public void powerUp() {
+        tank.powerUp();
+    }
 }

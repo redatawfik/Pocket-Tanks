@@ -6,6 +6,8 @@ public interface Action {
     String MOVE_RIGHT = "move-right";
     String CANON_UP = "canon-up";
     String CANON_DOWN = "canon-down";
+    String POWER_UP = "power-up";
+    String POWER_DOWN = "power-down";
 
     void shoot();
 
@@ -16,4 +18,8 @@ public interface Action {
     void canonUp();
 
     void canonDown();
+
+    void powerDown();
+
+    void powerUp();
 }
