@@ -27,4 +27,6 @@
 #ide
 /web-api/.idea
 
-.idea
+/.idea/
+/web-api/.idea/
+/web-api/src/.idea/
