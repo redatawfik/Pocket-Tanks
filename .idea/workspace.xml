@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9da6b451-a01b-44f3-a700-4fb7e93b4b6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/game/pocjet-tanks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/game/pocjet-tanks.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/Controllers/matchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/Controllers/matchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/Dao/matchesDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/Dao/matchesDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/Services/matchesService.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/Services/matchesService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/models/Match.php" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/models/Match.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Pocket-Tanks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pocket-Tanks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/src/main/java/game/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/game/src/main/java/game/menu/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +29,27 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="C:/JOGLwin/lib64" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -43,10 +60,22 @@
       <option name="presentableId" value="Default" />
       <updated>1609142737877</updated>
       <workItem from="1609142739369" duration="45000" />
+      <workItem from="1609336707671" duration="778000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

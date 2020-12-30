@@ -14,6 +14,8 @@ public class Bullet extends GameObject {
     private float time;
     private final float[] mesh;
     private Tank source;
+//    private final Sprite[] sprite = new Sprite[16];
+
 
     public Bullet(float angel, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
         this.angel = -angel * DEG2RAD;
@@ -27,6 +29,11 @@ public class Bullet extends GameObject {
         mesh = Ground.getInstance().getMesh();
         setImageResource(new ImageResource("/bullet.png"));
         this.source = tank;
+//        for(int i = 0; i<16;i++){
+//            sprite[i] = new Sprite(getX(),getY(),"/"+(i+1)+".png");
+//            sprite[i].setWidth(10);
+//            sprite[i].setHeight(10);
+//        }
     }
 
     private void shoot() {
@@ -53,6 +60,7 @@ public class Bullet extends GameObject {
         }
 
         if (getY() <= mesh[(int) getX()]) {
+            bulletAnimation();
             Ground.getInstance().destroyGround(getX());
             destructor.checkDamage(getX());
             destructor.destroy();
@@ -62,4 +70,22 @@ public class Bullet extends GameObject {
     public void update() {
         shoot();
     }
+
+    public void bulletAnimation() {
+        Sprite[] sprite = new Sprite[16];
+        for(int i = 0; i<16;i++){
+            sprite[i] = new Sprite(getX(),getY(),"/"+(i+1)+".png");
+            sprite[i].setWidth(10);
+            sprite[i].setHeight(10);
+        }
+        try {
+            for (int i = 0; i < sprite.length; i++) {
+                sprite[i].draw();
+                Thread.sleep(100);
+            }
+        }catch (InterruptedException exception){}
+
+    }
 }
+
+

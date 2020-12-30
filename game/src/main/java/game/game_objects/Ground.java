@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class Ground {
     private static Ground instance;
-
     private final float[] mesh;
     private int finishedCells;
 
@@ -62,19 +61,19 @@ public class Ground {
     }
 
     public void destroyGround(float x) {
-        float[] min = new float[9];
-        float nn = .2f;
+        float[] min = new float[5];
+        float nn = .8f;
 
         for (int i = 0; i < min.length; i++) {
             min[i] = nn;
             if (i < min.length / 2) {
-                nn += .1;
+                nn += .5;
             } else {
-                nn -= .1;
+                nn -= .5;
             }
         }
 
-        for (int i = (int) (x - 4), y = 0; i <= x + 4; i++, y++) {
+        for (int i = (int) (x - 2), y = 0; i <= x +2; i++, y++) {
             mesh[i] -= min[y];
         }
     }
