@@ -1,6 +1,7 @@
 package game.game_objects;
 
 import game.ImageResource;
+import game.World;
 
 public class Bullet extends GameObject {
 
@@ -14,6 +15,7 @@ public class Bullet extends GameObject {
     private float time;
     private final float[] mesh;
     private Tank source;
+    private final ImageResource[] animations;
 
     public Bullet(float angel, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
         this.angel = -angel * DEG2RAD;
@@ -27,6 +29,12 @@ public class Bullet extends GameObject {
         mesh = Ground.getInstance().getMesh();
         setImageResource(new ImageResource("/bullet.png"));
         this.source = tank;
+
+        animations = new ImageResource[16];
+        for (int i = 0; i < 16; i++) {
+            animations[i] = new ImageResource("/" + (i + 1) + ".png");
+        }
+
     }
 
     private void shoot() {
@@ -55,6 +63,7 @@ public class Bullet extends GameObject {
         if (getY() <= mesh[(int) getX()]) {
             Ground.getInstance().destroyGround(getX());
             destructor.checkDamage(getX());
+            World.getInstance().startBulletAnimation(getX(), getY(), animations);
             destructor.destroy();
         }
     }

@@ -4,6 +4,7 @@ package game;
 import game.action.AbstractAction;
 import game.action.EnemyAction;
 import game.action.MyAction;
+import game.game_objects.GameObject;
 import game.game_objects.Ground;
 import game.game_objects.Tank;
 import game.menu.LoadingView;
@@ -18,6 +19,12 @@ public class World {
     private final Ground ground;
     private boolean isMyTurn;
     private boolean leftTurn = true;
+
+    // Bullet animations
+    private int bulletAnimationIndex = -1;
+    private boolean shouldAnimateBullet;
+    private ImageResource[] bulletAnimations;
+    private float bulletX, bulletY;
 
     private World() {
         ground = Ground.getInstance();
@@ -65,12 +72,23 @@ public class World {
         myTank.draw();
         enemyTank.draw();
         ground.draw();
+        if (shouldAnimateBullet) {
+            drawBulletAnimation();
+        }
     }
 
     public void update() {
         myTank.update();
         enemyTank.update();
         GameFrame.getInstance().updateControlPanel();
+        if (shouldAnimateBullet) {
+            if (bulletAnimationIndex < 15) {
+                bulletAnimationIndex++;
+            } else {
+                shouldAnimateBullet = false;
+                bulletAnimationIndex = -1;
+            }
+        }
     }
 
     public void setMeLeft() {
@@ -126,5 +144,16 @@ public class World {
             return leftTank;
 
         return rightTank;
+    }
+
+    public void startBulletAnimation(float x, float y, ImageResource[] resources) {
+        bulletX = x;
+        bulletY = y;
+        bulletAnimations = resources;
+        shouldAnimateBullet = true;
+    }
+
+    private void drawBulletAnimation() {
+        new GameObject(bulletX, bulletY, 5, 5, bulletAnimations[bulletAnimationIndex], 0).draw();
     }
 }
