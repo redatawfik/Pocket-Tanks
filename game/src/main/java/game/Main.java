@@ -42,4 +42,13 @@ public class Main {
         GameFrame.getInstance().changeDisplayToGame(game);
         game.start();
     }
+
+    public static void initializeLocalMultiPlayerGame(){
+        Ground.getInstance().generateMap();
+
+        World.getInstance().setMeLeft();
+        Game game = Game.getInstance();
+        GameFrame.getInstance().changeDisplayToGame(game);
+        game.start();
+    }
 }

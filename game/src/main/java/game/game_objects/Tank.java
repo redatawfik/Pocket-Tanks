@@ -136,7 +136,8 @@ public class Tank extends GameObject implements BulletDestructor {
                 ((World.getInstance().isMyTurn() && World.getInstance().isRightPosition()) ||
                         (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition()))) {
             delta *= -1;
-        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER
+                && !World.getInstance().isLeftTurn()) {
             delta *= -1;
         }
 

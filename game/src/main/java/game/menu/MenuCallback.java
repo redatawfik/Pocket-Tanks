@@ -22,7 +22,7 @@ public class MenuCallback {
 
     public void startLocalGame() {
         GameFrame.getInstance().setGameMode(GameMode.OFFLINE_MULTIPLAYER);
-        Main.initializeHostGame();
+        Main.initializeLocalMultiPlayerGame();
         System.out.println("Start local game");
     }
 
