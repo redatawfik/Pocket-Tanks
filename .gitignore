@@ -26,3 +26,5 @@
 /websocket/php-socket/.idea/
 #ide
 /web-api/.idea
+
+/.idea
