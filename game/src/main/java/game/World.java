@@ -41,6 +41,7 @@ public class World {
         return instance;
     }
 
+
     public static void destroy() {
         AbstractAction.getInstance().destroy();
         EnemyAction.getInstance().destroy();
@@ -59,6 +60,7 @@ public class World {
         if(myTank.getBulletCounter()==0 && enemyTank.getBulletCounter()==0)
             MyAction.getInstance().endMatch();
     }
+ 
 
     public Tank getMyTank() {
         return myTank;
