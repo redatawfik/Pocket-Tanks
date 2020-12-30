@@ -104,6 +104,13 @@ public class MyAction implements Action {
 
         String text = "{\"user1\":\"test\",\"user2\":\"testt\",\"score1\":\"" + tank1.getScore() + "\",\"score2\":\"" + tank2.getScore() + "\"}";
         Site.sendResult(text);
+
+        World.destroy();
+
         GameFrame.getInstance().changeDisplayToMenu();
+    }
+
+    public void destroy() {
+        instance = null;
     }
 }

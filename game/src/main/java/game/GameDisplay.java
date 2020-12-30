@@ -165,4 +165,8 @@ public class GameDisplay implements GLEventListener {
             gl.glEnd();
         }
     }
+
+    public void destroy() {
+        instance = null;
+    }
 }

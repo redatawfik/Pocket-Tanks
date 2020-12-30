@@ -12,7 +12,7 @@ public class EnemyAction implements Action {
         tank = World.getInstance().getEnemyTank();
     }
 
-    public static Action getInstance() {
+    public static EnemyAction getInstance() {
         if (instance == null)
             instance = new EnemyAction();
 
@@ -54,5 +54,9 @@ public class EnemyAction implements Action {
     @Override
     public void powerUp() {
         tank.powerUp();
+    }
+
+    public void destroy() {
+        instance = null;
     }
 }

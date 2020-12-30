@@ -1,9 +1,12 @@
 package game;
 
 
+import game.action.AbstractAction;
+import game.action.EnemyAction;
 import game.action.MyAction;
 import game.game_objects.Ground;
 import game.game_objects.Tank;
+import game.menu.LoadingView;
 
 public class World {
 
@@ -14,6 +17,7 @@ public class World {
     private Tank enemyTank;
     private final Ground ground;
     private boolean isMyTurn;
+    private boolean leftTurn = true;
 
     private World() {
         ground = Ground.getInstance();
@@ -31,6 +35,14 @@ public class World {
     }
 
     public static void destroy() {
+        AbstractAction.getInstance().destroy();
+        EnemyAction.getInstance().destroy();
+        MyAction.getInstance().destroy();
+        LoadingView.getInstance().destroy();
+
+        Game.getInstance().destroyGame();
+        GameDisplay.getInstance().destroy();
+
         Ground.getInstance().destroy();
 
         instance = null;
@@ -58,6 +70,7 @@ public class World {
     public void update() {
         myTank.update();
         enemyTank.update();
+        GameFrame.getInstance().updateControlPanel();
     }
 
     public void setMeLeft() {
@@ -98,5 +111,20 @@ public class World {
         } else {
             return myTank;
         }
+    }
+
+    public boolean isLeftTurn() {
+        return leftTurn;
+    }
+
+    public void setLeftTurn(boolean turn) {
+        leftTurn = turn;
+    }
+
+    public Tank getTurnTank() {
+        if (leftTurn)
+            return leftTank;
+
+        return rightTank;
     }
 }

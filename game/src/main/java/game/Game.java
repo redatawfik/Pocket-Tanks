@@ -60,6 +60,10 @@ public class Game extends GLCanvas {
     public void paint(Graphics graphics) {
         super.paint(graphics);
 
-      //  graphics.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        //  graphics.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
+    public void destroyGame() {
+        instance = null;
     }
 }

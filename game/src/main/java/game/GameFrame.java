@@ -2,6 +2,7 @@ package game;
 
 import com.jogamp.opengl.awt.GLCanvas;
 import game.game_objects.Tank;
+import game.menu.GameMode;
 import game.menu.LoadingView;
 import game.menu.Menu;
 
@@ -18,6 +19,7 @@ public class GameFrame extends JFrame implements LineListener {
     private final String MENU_MUSIC_PATH = "/start-music.au";
     private final String GAME_MUSIC_PATH = "/back-music.au";
     private JPanel gamePanel;
+    private GameMode gameMode;
 
     private GameFrame() {
         SwingUtilities.invokeLater(
@@ -111,16 +113,30 @@ public class GameFrame extends JFrame implements LineListener {
     }
 
     public void updateControlPanel() {
-        Tank tank = World.getInstance().getMyTank();
-        int angel = tank.getAngel();
-        if (World.getInstance().isRightPosition()) {
-            angel *= -1;
-            angel = 180 - angel;
-        } else {
-            angel *= -1;
+        Tank tank = null;
+        int angel = 0;
+
+
+        if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
+            tank = World.getInstance().getMyTank();
+            angel = tank.getAngel();
+            if (World.getInstance().isRightPosition()) {
+                angel *= -1;
+                angel = 180 - angel;
+            } else {
+                angel *= -1;
+            }
+        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+            tank = World.getInstance().getTurnTank();
+            angel = tank.getAngel();
+            if (!World.getInstance().isLeftTurn()) {
+                angel *= -1;
+                angel = 180 - angel;
+            } else {
+                angel *= -1;
+            }
         }
 
-        if(angel == 360) angel = 0;
 
         controlPanel.setPower(tank.getPower());
         controlPanel.setAngel(angel);
@@ -152,4 +168,13 @@ public class GameFrame extends JFrame implements LineListener {
     public int getCurrHeight() {
         return getWindowHeight();
     }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
 }
+

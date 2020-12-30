@@ -77,4 +77,8 @@ public class LoadingView extends JPanel {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
+
+    public void destroy() {
+        instance = null;
+    }
 }

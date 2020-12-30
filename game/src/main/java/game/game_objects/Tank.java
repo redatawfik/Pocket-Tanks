@@ -1,8 +1,10 @@
 package game.game_objects;
 
 
+import game.GameFrame;
 import game.ImageResource;
 import game.World;
+import game.menu.GameMode;
 
 public class Tank extends GameObject implements BulletDestructor {
 
@@ -118,16 +120,25 @@ public class Tank extends GameObject implements BulletDestructor {
     public void canonUp() {
         float delta = -.5f;
         if ((World.getInstance().isMyTurn() && World.getInstance().isRightPosition()) ||
-                (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition()))
+                (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition())) {
             delta *= -1;
+        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER &&
+                !World.getInstance().isLeftTurn()) {
+            delta *= -1;
+        }
+
         getCanon().setRotation(canon.getRotation() + delta);
     }
 
     public void canonDown() {
         float delta = .5f;
-        if ((World.getInstance().isMyTurn() && World.getInstance().isRightPosition()) ||
-                (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition()))
+        if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE &&
+                ((World.getInstance().isMyTurn() && World.getInstance().isRightPosition()) ||
+                        (!World.getInstance().isMyTurn() && !World.getInstance().isRightPosition()))) {
             delta *= -1;
+        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+            delta *= -1;
+        }
 
         getCanon().setRotation(canon.getRotation() + delta);
     }
