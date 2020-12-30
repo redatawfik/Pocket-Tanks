@@ -23,8 +23,10 @@ public class GameDisplay implements GLEventListener {
     private long elapsedSeconds;
     private int elapsedNanos;
     int frames = 0;
+    private final ImageResource backgroundImageResource;
 
     private GameDisplay() {
+        backgroundImageResource = new ImageResource("/game_background_sky.jpg");
     }
 
     public static GameDisplay getInstance() {
@@ -48,6 +50,7 @@ public class GameDisplay implements GLEventListener {
 
         textRenderer = new TextRenderer(new java.awt.Font("SansSerif", Font.BOLD, 36));
 
+
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
     }
 
@@ -62,10 +65,12 @@ public class GameDisplay implements GLEventListener {
 
         gl.glEnable(GL2.GL_BLEND);
 
+        drawImage(backgroundImageResource, 50, 20, 100, 50, 0);
 
         World.getInstance().update();
 
         World.getInstance().draw();
+
 
         textRenderer.beginRendering(GameFrame.getInstance().getCurrWidth(), GameFrame.getInstance().getCurrHeight());
 
@@ -95,7 +100,8 @@ public class GameDisplay implements GLEventListener {
     }
 
     public void drawImage(ImageResource image, float x, float y, float width, float height, float rotation) {
-         Texture texture = image.getTexture();
+
+        Texture texture = image.getTexture();
 
         if (texture != null) {
             gl.glBindTexture(GL2.GL_TEXTURE_2D, texture.getTextureObject());

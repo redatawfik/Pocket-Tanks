@@ -8,8 +8,8 @@ import java.util.TimerTask;
 public class Main {
 
     public static void main(String[] args) {
-        GameFrame.getInstance();
-        //Main.initializeHostGame();
+        //GameFrame.getInstance();
+        Main.initializeHostGame();
     }
 
     public static void initializeGuestGame() {

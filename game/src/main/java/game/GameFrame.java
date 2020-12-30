@@ -112,8 +112,18 @@ public class GameFrame extends JFrame implements LineListener {
 
     public void updateControlPanel() {
         Tank tank = World.getInstance().getMyTank();
+        int angel = tank.getAngel();
+        if (World.getInstance().isRightPosition()) {
+            angel *= -1;
+            angel = 180 - angel;
+        } else {
+            angel *= -1;
+        }
+
+        if(angel == 360) angel = 0;
+
         controlPanel.setPower(tank.getPower());
-        controlPanel.setAngel(tank.getAngel());
+        controlPanel.setAngel(angel);
         controlPanel.setNumOfMoves(tank.getMoves());
     }
 

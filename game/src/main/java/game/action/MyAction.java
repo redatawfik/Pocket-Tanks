@@ -80,6 +80,8 @@ public class MyAction implements Action {
 
     @Override
     public void powerUp() {
+        if(!World.getInstance().isMyTurn()) return;
+
         tank.powerUp();
         socket.sendMessage(Action.POWER_UP);
         GameFrame.getInstance().updateControlPanel();
@@ -89,6 +91,8 @@ public class MyAction implements Action {
 
     @Override
     public void powerDown() {
+        if(!World.getInstance().isMyTurn()) return;
+
         tank.powerDown();
         socket.sendMessage(Action.POWER_DOWN);
         GameFrame.getInstance().updateControlPanel();
