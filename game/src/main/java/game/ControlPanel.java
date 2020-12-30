@@ -9,6 +9,7 @@ public class ControlPanel extends JPanel {
     private JLabel powerLabel;
     private JLabel angelLabel;
     private JLabel numOfMovesLabel;
+    private JLabel scoreLabel;
 
     private ControlPanel() {
         init();
@@ -35,20 +36,29 @@ public class ControlPanel extends JPanel {
         numOfMovesLabel.setBackground(Color.ORANGE);
         numOfMovesLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
 
+        scoreLabel = new JLabel();
+        scoreLabel.setBackground(Color.BLACK);
+        scoreLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+
         add(powerLabel);
         add(angelLabel);
         add(numOfMovesLabel);
+        add(scoreLabel);
     }
 
     public void setPower(int power) {
-        powerLabel.setText(String.valueOf(power));
+        powerLabel.setText("Power: " + power);
     }
 
     public void setAngel(int angel) {
-        angelLabel.setText(String.valueOf(angel));
+        angelLabel.setText("Angel: " + angel);
     }
 
     public void setNumOfMoves(int movesLeft) {
-        numOfMovesLabel.setText(String.valueOf(movesLeft));
+        numOfMovesLabel.setText("Moves left: " + movesLeft);
+    }
+
+    public void setScore(int score) {
+        scoreLabel.setText("");
     }
 }

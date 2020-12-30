@@ -4,8 +4,10 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.util.awt.TextRenderer;
 import com.jogamp.opengl.util.texture.Texture;
 
+import java.awt.*;
 import java.time.Duration;
 import java.time.LocalTime;
 
@@ -15,6 +17,7 @@ public class GameDisplay implements GLEventListener {
     private static GameDisplay instance;
 
     private GL2 gl;
+    TextRenderer textRenderer;
 
     private LocalTime startTime;
     private long elapsedSeconds;
@@ -43,6 +46,8 @@ public class GameDisplay implements GLEventListener {
 
         gl.glEnable(GL2.GL_TEXTURE_2D);
 
+        textRenderer = new TextRenderer(new java.awt.Font("SansSerif", Font.BOLD, 36));
+
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
     }
 
@@ -61,6 +66,13 @@ public class GameDisplay implements GLEventListener {
         World.getInstance().update();
 
         World.getInstance().draw();
+
+        textRenderer.beginRendering(GameFrame.getInstance().getCurrWidth(), GameFrame.getInstance().getCurrHeight());
+
+        textRenderer.setColor(1.0f, 0.2f, 0.2f, 0.8f);
+        textRenderer.draw(String.valueOf(World.getInstance().getLeftTank().getScore()), 10, GameFrame.getInstance().getCurrHeight() - 50);
+        textRenderer.draw(String.valueOf(World.getInstance().getRightTank().getScore()), GameFrame.getInstance().getCurrWidth() - 100, GameFrame.getInstance().getCurrHeight() - 50);
+        textRenderer.endRendering();
 
         gl.glDisable(GL.GL_BLEND);
 

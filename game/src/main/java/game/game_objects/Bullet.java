@@ -1,7 +1,6 @@
 package game.game_objects;
 
 import game.ImageResource;
-import game.World;
 
 public class Bullet extends GameObject {
 

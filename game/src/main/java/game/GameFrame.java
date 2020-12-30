@@ -10,7 +10,6 @@ import javax.sound.sampled.LineListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
-import java.net.URL;
 
 public class GameFrame extends JFrame implements LineListener {
     private static GameFrame instance;
@@ -93,8 +92,6 @@ public class GameFrame extends JFrame implements LineListener {
 
         getContentPane().removeAll();
 
-
-
         getContentPane().add(Menu.getInstance());
 
         revalidate();
@@ -138,4 +135,11 @@ public class GameFrame extends JFrame implements LineListener {
     }
 
 
+    public int getCurrWidth() {
+        return getWindowWidth();
+    }
+
+    public int getCurrHeight() {
+        return getWindowHeight();
+    }
 }
