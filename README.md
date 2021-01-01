@@ -28,7 +28,8 @@ The feature can be split into two main categories:
 
 ## Design
 ### Architecture
-![architecture](https://drive.google.com/file/d/1dsqFL5deAWu0KRmgNfsNXwRrSNW_xyNS/view?usp=sharing)
+![architecture](https://user-images.githubusercontent.com/13278795/103447939-dd83a980-4c9a-11eb-8cdc-aa708c3d2263.png)
+
 - As shown in the figure, the user can interact with either the local game, or the web front end in the browser.
 - Matching two players will be done through a WebSocket server.
 - The WebSocket server is the main communication channel between the two players while playing the game.
@@ -36,11 +37,10 @@ The feature can be split into two main categories:
 - The webserver communicates with the database server to save and show the data on the site front-end.
 
 ### User sequence diagram
-![sequence diagram](https://drive.google.com/file/d/1Yir2UcEjBVWCkd0KtH4PY-COO98OX38M/view?usp=sharing)
+![User-Sequence](https://user-images.githubusercontent.com/13278795/103447940-deb4d680-4c9a-11eb-9645-4705b5517972.png)
 
 ### Database design
-![sequence diagram](https://drive.google.com/file/d/14Etd7imIm3LNl6tj9X8fvA2UNBHZuwst/view?usp=sharing)
-
+![database-diagram](https://user-images.githubusercontent.com/13278795/103447942-e07e9a00-4c9a-11eb-8427-a54db50dda1c.png)
 
 
 
