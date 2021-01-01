@@ -2,6 +2,7 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class ControlPanel extends JPanel {
     private static ControlPanel instance;
@@ -9,6 +10,7 @@ public class ControlPanel extends JPanel {
     private JLabel powerLabel;
     private JLabel angelLabel;
     private JLabel numOfMovesLabel;
+    private JButton pauseButton;
 
     private ControlPanel() {
         init();
@@ -21,7 +23,7 @@ public class ControlPanel extends JPanel {
     }
 
     private void init() {
-        setLayout(new GridLayout(1, 4));
+        setLayout(new GridLayout(1, 5));
 
         powerLabel = new JLabel();
         powerLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
@@ -35,9 +37,23 @@ public class ControlPanel extends JPanel {
         numOfMovesLabel.setBackground(Color.ORANGE);
         numOfMovesLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
 
+        pauseButton = new JButton("End the game");
+        pauseButton.setBackground(Color.RED);
+        pauseButton.setForeground(Color.WHITE);
+        pauseButton.setFont(new Font("Monospaced", Font.BOLD, 20));
+
+        pauseButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                World.destroy();
+                GameFrame.getInstance().changeDisplayToMenu();
+            }
+        });
+
         add(powerLabel);
         add(angelLabel);
         add(numOfMovesLabel);
+        add(pauseButton);
     }
 
     public void setPower(int power) {
