@@ -12,6 +12,8 @@ import game.menu.GameMode;
 import game.menu.LoadingView;
 import game.networking.Socket;
 
+import java.util.Timer;
+
 public class World {
 
     private static World instance;
@@ -68,8 +70,18 @@ public class World {
 
     public void checkEndOFGame() {
         if (myTank.getBulletCounter() == 0 && enemyTank.getBulletCounter() == 0) {
-            destroy();
-            GameFrame.getInstance().changeDisplayToMenu();
+//            destroy();
+//            GameFrame.getInstance().changeDisplayToMenu();
+            new Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            GameFrame.getInstance().showResultView(leftTank.getScore() > rightTank.getScore() ?
+                                    "Left tank won" : "Right tank won");
+                        }
+                    },
+                    5000
+            );
         }
     }
 

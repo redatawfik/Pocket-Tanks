@@ -81,7 +81,6 @@ public class Sound {
                         e.printStackTrace();
                     }
                 }
-
             });
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | URISyntaxException e) {

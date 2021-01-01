@@ -133,6 +133,13 @@ public class GameFrame extends JFrame {
         controlPanel.setNumOfMoves(tank.getMoves());
     }
 
+    public void showResultView(String result) {
+        getContentPane().removeAll();
+
+        getContentPane().add(new ResultView(result));
+        revalidate();
+    }
+
     public void close() {
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
