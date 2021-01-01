@@ -31,12 +31,17 @@ public class World {
     private ImageResource[] bulletAnimations;
     private float bulletX, bulletY;
 
+    private GameObject arrow;
+    private ImageResource arrowImageResource;
+
     private World() {
         ground = Ground.getInstance();
         int tX = 15;
         int tY = 10;
         leftTank = new Tank(tX, tY, "m1.png", -45);
         rightTank = new Tank(tX + 65, tY, "m1.png", -135);
+        arrow = new GameObject();
+        arrowImageResource = new ImageResource("/arrow.png");
     }
 
     public static World getInstance() {
@@ -100,6 +105,28 @@ public class World {
         if (shouldAnimateBullet) {
             drawBulletAnimation();
         }
+
+        drawArrow();
+    }
+
+    private void drawArrow() {
+        Tank tank;
+        if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
+            if (isMyTurn) {
+                tank = getMyTank();
+            } else {
+                tank = getEnemyTank();
+            }
+        } else {
+            tank = getTurnTank();
+        }
+
+        arrow.setX(tank.getX());
+        arrow.setY(tank.getY() + 5);
+        arrow.setImageResource(arrowImageResource);
+        arrow.setWidth(3);
+        arrow.setHeight(3);
+        arrow.draw();
     }
 
     public void update() {
