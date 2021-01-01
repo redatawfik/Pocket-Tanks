@@ -37,3 +37,5 @@
 /game/bin/
 /game/pocjet-tanks.iml
 game/pocjet-tanks.iml
+*.iml
+game/.project
