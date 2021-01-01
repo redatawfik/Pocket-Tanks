@@ -19,7 +19,7 @@ public class World {
     private final Ground ground;
     private boolean isMyTurn;
     private boolean leftTurn = true;
-
+    private boolean shouldPlaynow = false;
     // Bullet animations
     private int bulletAnimationIndex = -1;
     private boolean shouldAnimateBullet;
@@ -57,10 +57,17 @@ public class World {
     }
 
     public void checkEndOFGame() {
-        if(myTank.getBulletCounter()==0 && enemyTank.getBulletCounter()==0)
+        if (myTank.getBulletCounter() == 0 && enemyTank.getBulletCounter() == 0)
             MyAction.getInstance().endMatch();
     }
- 
+
+    public boolean getShouldPlayNow() {
+        return shouldPlaynow;
+    }
+
+    public void setShouldPlayNow(boolean spn) {
+        this.shouldPlaynow = spn;
+    }
 
     public Tank getMyTank() {
         return myTank;
@@ -97,16 +104,20 @@ public class World {
         myTank = leftTank;
         enemyTank = rightTank;
         isMyTurn = true;
+        shouldPlaynow = true;
     }
 
     public void setMeRight() {
         myTank = rightTank;
         enemyTank = leftTank;
         isMyTurn = false;
+        shouldPlaynow = false;
     }
 
     public boolean isMyTurn() {
-        return isMyTurn;
+
+        // return (shouldPlaynow&&isMyTurn);
+        return (isMyTurn);
     }
 
     public void setMyTurn(boolean myTurn) {
@@ -127,8 +138,12 @@ public class World {
 
     public Tank getMyEnemy(Tank tank) {
         if (myTank == tank) {
+
+
             return enemyTank;
+
         } else {
+
             return myTank;
         }
     }

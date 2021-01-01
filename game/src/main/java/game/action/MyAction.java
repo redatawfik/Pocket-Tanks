@@ -29,6 +29,7 @@ public class MyAction implements Action {
 
     @Override
     public void shoot() {
+        World.getInstance().setShouldPlayNow(false);
         if (!World.getInstance().isMyTurn()) return;
 
         tank.shoot();
@@ -38,7 +39,7 @@ public class MyAction implements Action {
             socket.sendMessage(Action.SHOOT);
         } catch (Error ignored) {
         }
-
+        World.getInstance().setShouldPlayNow(false);
         World.getInstance().setMyTurn(false);
     }
 

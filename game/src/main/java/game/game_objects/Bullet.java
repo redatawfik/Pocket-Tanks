@@ -16,7 +16,7 @@ public class Bullet extends GameObject {
     private final float[] mesh;
     private Tank source;
     private final ImageResource[] animations;
-
+    boolean canMove = false;
     public Bullet(float angel, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
         this.angel = -angel * DEG2RAD;
         this.initialX = initialX;
@@ -29,6 +29,7 @@ public class Bullet extends GameObject {
         mesh = Ground.getInstance().getMesh();
         setImageResource(new ImageResource("/bullet.png"));
         this.source = tank;
+        
 
         animations = new ImageResource[16];
         for (int i = 0; i < 16; i++) {
@@ -56,11 +57,13 @@ public class Bullet extends GameObject {
         draw();
 
         if (getX() < 0 || getX() > 100) {
+            World.getInstance().setShouldPlayNow(true);
             destructor.destroy();
             return;
         }
 
         if (getY() <= mesh[(int) getX()]) {
+            World.getInstance().setShouldPlayNow(true);
             Ground.getInstance().destroyGround(getX());
             destructor.checkDamage(getX());
             World.getInstance().startBulletAnimation(getX(), getY(), animations);

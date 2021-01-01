@@ -22,7 +22,7 @@ public class EnemyAction implements Action {
     @Override
     public void shoot() {
         tank.shoot();
-
+        World.getInstance().setShouldPlayNow(false);
         World.getInstance().setMyTurn(true);
     }
 

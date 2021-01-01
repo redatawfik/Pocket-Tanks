@@ -98,6 +98,7 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void shoot() {
+        World.getInstance().setShouldPlayNow(false);
         bullet = new Bullet(canon.getRotation(), getX(), getY(), power, this, this);
         bulletCounter--;
         World.getInstance().checkEndOFGame();
@@ -146,6 +147,7 @@ public class Tank extends GameObject implements BulletDestructor {
 
     @Override
     public void destroy() {
+        World.getInstance().setShouldPlayNow(true);
         bullet = null;
     }
 
@@ -177,10 +179,14 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void powerUp() {
+        if(power>=100) {
+            power=99;
+        }
         power++;
     }
 
     public void powerDown() {
+        if(power<=0){power =1;}
         power--;
     }
 
