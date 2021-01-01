@@ -30,3 +30,7 @@
 /.idea/
 /web-api/.idea/
 /web-api/src/.idea/
+/game/.settings/
+/game/.classpath
+/game/.project
+/game/bin/
