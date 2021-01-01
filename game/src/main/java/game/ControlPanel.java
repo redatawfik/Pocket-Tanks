@@ -8,7 +8,7 @@ public class ControlPanel extends JPanel {
     private static ControlPanel instance;
 
     private JLabel powerLabel;
-    private JLabel angelLabel;
+    private JLabel angleLabel;
     private JLabel numOfMovesLabel;
     private JButton pauseButton;
 
@@ -29,9 +29,9 @@ public class ControlPanel extends JPanel {
         powerLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         powerLabel.setBackground(Color.BLACK);
 
-        angelLabel = new JLabel();
-        angelLabel.setBackground(Color.BLACK);
-        angelLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+        angleLabel = new JLabel();
+        angleLabel.setBackground(Color.BLACK);
+        angleLabel.setFont(new Font(Font.SERIF, Font.BOLD, 30));
 
         numOfMovesLabel = new JLabel();
         numOfMovesLabel.setBackground(Color.ORANGE);
@@ -51,7 +51,7 @@ public class ControlPanel extends JPanel {
         });
 
         add(powerLabel);
-        add(angelLabel);
+        add(angleLabel);
         add(numOfMovesLabel);
         add(pauseButton);
     }
@@ -60,13 +60,13 @@ public class ControlPanel extends JPanel {
         powerLabel.setText("Power: " + power);
     }
 
-    public void setAngel(int angel) {
-        if (angel > 360) {
-            angelLabel.setText("Angel: " + (angel - 360));
-        } else if (angel < 0) {
-            angelLabel.setText("Angel: " + (angel + 360));
+    public void setAngle(int angle) {
+        if (angle > 360) {
+            angleLabel.setText("Angle: " + (angle - 360));
+        } else if (angle < 0) {
+            angleLabel.setText("Angle: " + (angle + 360));
         } else {
-            angelLabel.setText("Angel: " + angel);
+            angleLabel.setText("Angle: " + angle);
         }
     }
 

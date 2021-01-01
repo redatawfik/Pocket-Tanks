@@ -8,7 +8,7 @@ public class Bullet extends GameObject {
     private final BulletDestructor destructor;
     private final double DEG2RAD = Math.PI / 180;
     private final float g = -9.8f;
-    private final double angel;
+    private final double angle;
     private final float initialX;
     private final float initialY;
     private final float initialVelocity;
@@ -16,8 +16,8 @@ public class Bullet extends GameObject {
     private final ImageResource[] animations;
     private float time;
 
-    public Bullet(float angel, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
-        this.angel = -angel * DEG2RAD;
+    public Bullet(float angle, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
+        this.angle = -angle * DEG2RAD;
         this.initialX = initialX;
         this.initialY = initialY;
         this.initialVelocity = initialVelocity;
@@ -39,8 +39,8 @@ public class Bullet extends GameObject {
 
         time += .018;
 
-        float velX = (float) (initialVelocity * Math.cos(angel));
-        float velY = (float) (initialVelocity * Math.sin(angel));
+        float velX = (float) (initialVelocity * Math.cos(angle));
+        float velY = (float) (initialVelocity * Math.sin(angle));
 
         float currVelo = velY + g * time;
 

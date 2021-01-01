@@ -29,7 +29,7 @@ public class ComputerAction {
                         // your code here
                         Random random = new Random();
                         AbstractAction.getInstance().setPower(random.nextInt(70) + 40);
-                        AbstractAction.getInstance().setAngel(-(random.nextInt(20) + 100));
+                        AbstractAction.getInstance().setAngle(-(random.nextInt(20) + 100));
                         AbstractAction.getInstance().shoot();
                     }
                 },

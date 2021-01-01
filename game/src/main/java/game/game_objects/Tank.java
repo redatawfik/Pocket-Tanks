@@ -17,9 +17,9 @@ public class Tank extends GameObject implements BulletDestructor {
     private int power = 40;
     private int score;
 
-    public Tank(float x, float y, String canonImage, float angel) {
+    public Tank(float x, float y, String canonImage, float angle) {
         this.canon = new GameObject(x + .5f, y - .1f, 5, 5,
-                new ImageResource("/" + canonImage), angel);
+                new ImageResource("/" + canonImage), angle);
         this.setX(x);
         this.setY(Ground.getInstance().getMesh()[(int) x] + .88f);
         this.setImageResource(new ImageResource("/tank.png"));
@@ -87,13 +87,16 @@ public class Tank extends GameObject implements BulletDestructor {
         int startX = (int) (getX() - getWidth());
         int endX = (int) (getX() + getWidth());
 
+        if (startX < 0) startX = 0;
+        if (endX < 0) endX = 0;
+
         float[] mesh = Ground.getInstance().getMesh();
 
         float startY = mesh[startX];
         float endY = mesh[endX];
 
-        float angel = (float) Math.atan((endY - startY) / (endX - startX));
-        setRotation((float) Math.toDegrees(-angel));
+        float angle = (float) Math.atan((endY - startY) / (endX - startX));
+        setRotation((float) Math.toDegrees(-angle));
     }
 
     public void shoot() {
@@ -107,6 +110,7 @@ public class Tank extends GameObject implements BulletDestructor {
         if (moves <= 0) return;
         if (leftMoves != 0 || rightMoves != 0) return;
         leftMoves = 150;
+        moves--;
     }
 
     public void moveRight() {
@@ -174,7 +178,7 @@ public class Tank extends GameObject implements BulletDestructor {
         this.power = power;
     }
 
-    public int getAngel() {
+    public int getAngle() {
         return (int) canon.getRotation();
     }
 

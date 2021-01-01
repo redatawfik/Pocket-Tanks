@@ -103,33 +103,33 @@ public class GameFrame extends JFrame {
 
     public void updateControlPanel() {
         Tank tank = null;
-        int angel = 0;
+        int angle = 0;
 
 
         if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
             tank = World.getInstance().getMyTank();
-            angel = tank.getAngel();
+            angle = tank.getAngle();
             if (World.getInstance().isRightPosition()) {
-                angel *= -1;
-                angel = 180 - angel;
+                angle *= -1;
+                angle = 180 - angle;
             } else {
-                angel *= -1;
+                angle *= -1;
             }
         } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER ||
                 GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER) {
             tank = World.getInstance().getTurnTank();
-            angel = tank.getAngel();
+            angle = tank.getAngle();
             if (!World.getInstance().isLeftTurn()) {
-                angel *= -1;
-                angel = 180 - angel;
+                angle *= -1;
+                angle = 180 - angle;
             } else {
-                angel *= -1;
+                angle *= -1;
             }
         }
 
 
         controlPanel.setPower(tank.getPower());
-        controlPanel.setAngel(angel);
+        controlPanel.setAngle(angle);
         controlPanel.setNumOfMoves(tank.getMoves());
     }
 

@@ -72,8 +72,8 @@ public class AbstractAction implements Action {
         }
     }
 
-    public void setAngel(float angel) {
-        world.getTurnTank().getCanon().setRotation(angel);
+    public void setAngle(float angle) {
+        world.getTurnTank().getCanon().setRotation(angle);
     }
 
     public void setPower(int power) {

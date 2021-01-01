@@ -31,8 +31,8 @@ public class World {
     private ImageResource[] bulletAnimations;
     private float bulletX, bulletY;
 
-    private GameObject arrow;
-    private ImageResource arrowImageResource;
+    private final GameObject arrow;
+    private final ImageResource arrowImageResource;
 
     private World() {
         ground = Ground.getInstance();
