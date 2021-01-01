@@ -179,16 +179,19 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void powerUp() {
-        if(power>=100) {
-            power=99;
+        if (power >= 100) {
+            power = 99;
         }
         power++;
     }
 
     public void powerDown() {
-        if(power<=0){power =1;}
+        if (power <= 0) {
+            power = 1;
+        }
         power--;
     }
+
     public int getScore() {
         return score;
     }
