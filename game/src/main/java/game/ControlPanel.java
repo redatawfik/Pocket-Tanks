@@ -45,8 +45,14 @@ public class ControlPanel extends JPanel {
     }
 
     public void setAngel(int angel) {
-        angelLabel.setText("Angel: " + angel);
-    }
+        if (angel > 360) {
+            angelLabel.setText("Angel: " + (angel - 360));
+        } else if (angel < 0) {
+            angelLabel.setText("Angel: " + (angel + 360));
+        } else {
+            angelLabel.setText("Angel: " + angel);
+        }   
+     }
 
     public void setNumOfMoves(int movesLeft) {
         numOfMovesLabel.setText("Moves left: " + movesLeft);
