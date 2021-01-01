@@ -39,3 +39,4 @@
 game/pocjet-tanks.iml
 *.iml
 game/.project
+game/.classpath
