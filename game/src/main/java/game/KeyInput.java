@@ -21,6 +21,8 @@ public class KeyInput implements KeyListener {
                 MyAction.getInstance().moveLeft();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
                 AbstractAction.getInstance().moveLeft();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
+                AbstractAction.getInstance().moveLeft();
             }
 
             shouldMove = false;
@@ -28,6 +30,8 @@ public class KeyInput implements KeyListener {
             if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
                 MyAction.getInstance().moveRight();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+                AbstractAction.getInstance().moveRight();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
                 AbstractAction.getInstance().moveRight();
             }
             shouldMove = false;
@@ -38,11 +42,15 @@ public class KeyInput implements KeyListener {
                 MyAction.getInstance().powerDown();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
                 AbstractAction.getInstance().powerDown();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
+                AbstractAction.getInstance().powerDown();
             }
         } else if (shouldMove && e.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
                 MyAction.getInstance().powerUp();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+                AbstractAction.getInstance().powerUp();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
                 AbstractAction.getInstance().powerUp();
             }
         }
@@ -52,12 +60,16 @@ public class KeyInput implements KeyListener {
                 MyAction.getInstance().canonUp();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
                 AbstractAction.getInstance().canonUp();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
+                AbstractAction.getInstance().canonUp();
             }
 
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
                 MyAction.getInstance().canonDown();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+                AbstractAction.getInstance().canonDown();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
                 AbstractAction.getInstance().canonDown();
             }
 
@@ -67,6 +79,8 @@ public class KeyInput implements KeyListener {
             if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
                 MyAction.getInstance().shoot();
             } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+                AbstractAction.getInstance().shoot();
+            } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER && World.getInstance().isLeftTurn()) {
                 AbstractAction.getInstance().shoot();
             }
         }

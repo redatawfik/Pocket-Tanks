@@ -9,7 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         GameFrame.getInstance();
-        //Main.initializeHostGame();
     }
 
     public static void initializeGuestGame() {
@@ -43,10 +42,20 @@ public class Main {
         game.start();
     }
 
-    public static void initializeLocalMultiPlayerGame(){
+    public static void initializeLocalMultiPlayerGame() {
         Ground.getInstance().generateMap();
 
         World.getInstance().setMeLeft();
+
+        Game game = Game.getInstance();
+        GameFrame.getInstance().changeDisplayToGame(game);
+        game.start();
+    }
+
+    public static void initializeVersusComputerGame() {
+        Ground.getInstance().generateMap();
+        World.getInstance().setMeLeft();
+
         Game game = Game.getInstance();
         GameFrame.getInstance().changeDisplayToGame(game);
         game.start();

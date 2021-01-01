@@ -19,6 +19,10 @@ public class EnemyAction implements Action {
         return instance;
     }
 
+    public static void destroy() {
+        instance = null;
+    }
+
     @Override
     public void shoot() {
         tank.shoot();
@@ -54,9 +58,5 @@ public class EnemyAction implements Action {
     @Override
     public void powerUp() {
         tank.powerUp();
-    }
-
-    public void destroy() {
-        instance = null;
     }
 }

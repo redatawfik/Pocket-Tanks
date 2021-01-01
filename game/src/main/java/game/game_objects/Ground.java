@@ -14,7 +14,6 @@ public class Ground {
 
     private Ground() {
         this.mesh = new float[110];
-        System.out.println("created a new mesh");
     }
 
     public static Ground getInstance() {
@@ -22,6 +21,10 @@ public class Ground {
             instance = new Ground();
 
         return instance;
+    }
+
+    public static void destroy() {
+        instance = null;
     }
 
     public void generateMap() {
@@ -56,34 +59,13 @@ public class Ground {
         return mesh;
     }
 
-
     public void draw() {
         GameDisplay.getInstance().drawGround(mesh);
-    }
-
-    public void destroyGround(float x) {
-        float[] min = new float[9];
-        float nn = .2f;
-
-        for (int i = 0; i < min.length; i++) {
-            min[i] = nn;
-            if (i < min.length / 2) {
-                nn += .1;
-            } else {
-                nn -= .1;
-            }
-        }
-
-        for (int i = (int) (x - 4), y = 0; i <= x + 4; i++, y++) {
-            mesh[i] -= min[y];
-        }
     }
 
     public void setYAtX(int x, float y) {
         mesh[x] = y;
         finishedCells++;
-//        System.out.println("===================================================================");
-//        System.out.println(mesh);
     }
 
     public void sendMapToGuest() {
@@ -100,7 +82,22 @@ public class Ground {
         return finishedCells;
     }
 
-    public void destroy() {
-        instance = null;
+    public void destroyGround(float x) {
+        float[] min = new float[9];
+        float nn = .2f;
+
+        for (int i = 0; i < min.length; i++) {
+            min[i] = nn;
+            if (i < min.length / 2) {
+                nn += .1;
+            } else {
+                nn -= .1;
+            }
+        }
+
+        for (int i = (int) (x - 4), y = 0; i <= x + 4; i++, y++) {
+            if (i < 0) continue;
+            mesh[i] -= min[y];
+        }
     }
 }

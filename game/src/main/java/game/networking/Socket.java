@@ -17,10 +17,17 @@ public class Socket {
     private WebSocket websocket;
 
     private Socket() {
-        connect();
     }
 
-    private void connect() {
+    public static Socket getInstance() {
+        if (socket == null) {
+            socket = new Socket();
+        }
+
+        return socket;
+    }
+
+    public void connect() {
         try {
             websocket = new WebSocketFactory()
                     .createSocket("ws://localhost:8080")
@@ -56,7 +63,7 @@ public class Socket {
             EnemyAction.getInstance().powerUp();
         } else if (message.equals(Action.POWER_DOWN)) {
             EnemyAction.getInstance().powerDown();
-        }else if (message.equals(Action.CLOSE)) {
+        } else if (message.equals(Action.CLOSE)) {
             MyAction.getInstance().endMatch();
         } else if (message.equals("left")) {
             Main.initializeHostGame();
@@ -70,12 +77,7 @@ public class Socket {
         }
     }
 
-    public static Socket getInstance() {
-        if (socket == null) {
-            socket = new Socket();
-        }
-
-        return socket;
+    public void closeConnection() {
+        websocket.sendClose();
     }
-
 }

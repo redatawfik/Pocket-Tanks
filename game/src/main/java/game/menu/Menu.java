@@ -12,14 +12,14 @@ import java.net.URISyntaxException;
 public class Menu extends JPanel implements ActionListener {
 
     private static Menu instance;
-
-    private Image backgroundImage;
     private final JButton startOnlineButton;
     private final JButton startLocalButton;
+    private final JButton startComputerButton;
     private final JButton exitButton;
+    private Image backgroundImage;
 
     private Menu() {
-        setLayout(new GridLayout(4, 1));
+        setLayout(new GridLayout(5, 1));
         try {
             backgroundImage = ImageIO.read(new File(getClass().getResource("/menu_background.jpg").toURI()));
         } catch (IOException | URISyntaxException e) {
@@ -46,6 +46,13 @@ public class Menu extends JPanel implements ActionListener {
         startLocalButton.addActionListener(this);
         startLocalGamePanel.add(startLocalButton);
 
+        JPanel startComputerGamePanel = new JPanel();
+        startComputerGamePanel.setBackground(new Color(0, 0, 0, 0));
+        startComputerButton = new JButton("Start Computer Game");
+        startComputerButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+        startComputerButton.addActionListener(this);
+        startComputerGamePanel.add(startComputerButton);
+
         JPanel exitPanel = new JPanel();
         exitPanel.setBackground(new Color(0, 0, 0, 0));
         exitButton = new JButton("Exit");
@@ -55,8 +62,8 @@ public class Menu extends JPanel implements ActionListener {
 
         add(titlePanel);
         add(startOnlineMatchPanel);
-        // add(loadingPanel());
         add(startLocalGamePanel);
+        add(startComputerGamePanel);
         add(exitPanel);
     }
 
@@ -84,6 +91,8 @@ public class Menu extends JPanel implements ActionListener {
             MenuCallback.getInstance().startLocalGame();
         } else if (e.getSource() == exitButton) {
             MenuCallback.getInstance().exit();
+        } else if (e.getSource() == startComputerButton) {
+            MenuCallback.getInstance().startComputerGame();
         }
     }
 }

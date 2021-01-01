@@ -14,7 +14,6 @@ public class LoadingView extends JPanel {
     private Image backgroundImage;
 
     private LoadingView() {
-       // setLayout(new GridLayout(3, 1));
         try {
             backgroundImage = ImageIO.read(new File(getClass().getResource("/menu_background.jpg").toURI()));
         } catch (IOException | URISyntaxException e) {
@@ -30,7 +29,6 @@ public class LoadingView extends JPanel {
         BoxLayout layoutMgr = new BoxLayout(this, BoxLayout.PAGE_AXIS);
         this.setLayout(layoutMgr);
 
-        //ClassLoader cldr = this.getClass().getClassLoader();
         URL imageURL = getClass().getResource("/spinner.gif");
         ImageIcon imageIcon = new ImageIcon(imageURL);
         JLabel iconLabel = new JLabel();
@@ -49,36 +47,18 @@ public class LoadingView extends JPanel {
     }
 
     public static LoadingView getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new LoadingView();
         return instance;
     }
 
-    private JPanel loadingPanel() {
-        JPanel panel = new JPanel();
-        BoxLayout layoutMgr = new BoxLayout(panel, BoxLayout.PAGE_AXIS);
-        panel.setLayout(layoutMgr);
-
-        //ClassLoader cldr = this.getClass().getClassLoader();
-        URL imageURL = getClass().getResource("/spinner.gif");
-        ImageIcon imageIcon = new ImageIcon(imageURL);
-        JLabel iconLabel = new JLabel();
-        iconLabel.setIcon(imageIcon);
-        imageIcon.setImageObserver(iconLabel);
-
-        JLabel label = new JLabel("Loading...");
-        panel.add(iconLabel);
-        panel.add(label);
-        return panel;
+    public static void destroy() {
+        instance = null;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-    }
-
-    public void destroy() {
-        instance = null;
     }
 }

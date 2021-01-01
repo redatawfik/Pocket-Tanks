@@ -14,11 +14,19 @@ import java.net.URISyntaxException;
 
 public class Game extends GLCanvas {
 
-    private static Game instance;
-    private Image backgroundImage;
-
     public static FPSAnimator animator = null;
+    private static Game instance;
     private static GLProfile profile;
+
+    private Game(GLCapabilities capabilities, GameDisplay display) {
+        super(capabilities);
+
+        addGLEventListener(display);
+        addKeyListener(new KeyInput());
+
+        //create the animator
+        animator = new FPSAnimator(this, 60);
+    }
 
     public static Game getInstance() {
         if (instance == null) {
@@ -30,40 +38,21 @@ public class Game extends GLCanvas {
         return instance;
     }
 
-    private Game(GLCapabilities capabilities, GameDisplay display) {
-        super(capabilities);
+    public static GLProfile getProfile() {
+        return profile;
+    }
 
-        addGLEventListener(display);
-        addKeyListener(new KeyInput());
+    public static void destroyGame() {
+        instance = null;
+    }
 
-        try {
-            backgroundImage = ImageIO.read(new File(getClass().getResource("/menu_background.jpg").toURI()));
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        //create the animator
-        animator = new FPSAnimator(this, 60);
+    public static void stopAnimation() {
+        animator.stop();
     }
 
     public void start() {
         SwingUtilities.invokeLater(
                 () -> animator.start()
         );
-    }
-
-    public static GLProfile getProfile() {
-        return profile;
-    }
-
-    @Override
-    public void paint(Graphics graphics) {
-        super.paint(graphics);
-
-        //  graphics.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-    }
-
-    public void destroyGame() {
-        instance = null;
     }
 }

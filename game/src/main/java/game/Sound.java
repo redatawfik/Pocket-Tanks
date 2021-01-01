@@ -16,6 +16,7 @@ public class Sound {
 
         if (backGroundAudioClip != null) {
             backGroundAudioClip.stop();
+            backGroundAudioClip.close();
         }
 
         if (backgroundAudioStream != null) {
@@ -29,8 +30,6 @@ public class Sound {
         //Create an AudioInputStream from a given sound file
         URL menuSoundPath = Sound.class.getResource(path);
 
-        System.out.println();
-
         try {
             File audioFile = new File(menuSoundPath.toURI());
 
@@ -43,18 +42,11 @@ public class Sound {
             // Obtain the Clip
             backGroundAudioClip = (Clip) AudioSystem.getLine(info);
 
-            // Open the AudioInputStream and start playing
-            //backGroundAudioClip.addLineListener(this);
-
             backGroundAudioClip.open(backgroundAudioStream);
 
             backGroundAudioClip.loop(Clip.LOOP_CONTINUOUSLY);
 
             backGroundAudioClip.start();
-
-            // Close and release resources acquired
-            //audioClip.close();
-            //audioStream.close();
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | URISyntaxException e) {
             e.printStackTrace();
@@ -79,6 +71,18 @@ public class Sound {
             audioClip.open(audioStream);
 
             audioClip.start();
+
+            audioClip.addLineListener(event -> {
+                if (event.getFramePosition() == audioClip.getFrameLength()) {
+                    audioClip.close();
+                    try {
+                        audioStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            });
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | URISyntaxException e) {
             e.printStackTrace();

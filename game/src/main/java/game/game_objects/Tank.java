@@ -11,15 +11,6 @@ public class Tank extends GameObject implements BulletDestructor {
     private final GameObject canon;
     private Bullet bullet;
     private int bulletCounter = 10;
-
-    public int getBulletCounter() {
-        return bulletCounter;
-    }
-
-    public void setBulletCounter(int bulletCounter) {
-        this.bulletCounter = bulletCounter;
-    }
-
     private int moves = 5;
     private int leftMoves;
     private int rightMoves;
@@ -32,6 +23,14 @@ public class Tank extends GameObject implements BulletDestructor {
         this.setX(x);
         this.setY(Ground.getInstance().getMesh()[(int) x] + .88f);
         this.setImageResource(new ImageResource("/tank.png"));
+    }
+
+    public int getBulletCounter() {
+        return bulletCounter;
+    }
+
+    public void setBulletCounter(int bulletCounter) {
+        this.bulletCounter = bulletCounter;
     }
 
     @Override
@@ -105,13 +104,13 @@ public class Tank extends GameObject implements BulletDestructor {
     }
 
     public void moveLeft() {
-        if(moves <= 0)return;
+        if (moves <= 0) return;
         if (leftMoves != 0 || rightMoves != 0) return;
         leftMoves = 150;
     }
 
     public void moveRight() {
-        if(moves <= 0)return;
+        if (moves <= 0) return;
         if (leftMoves != 0 || rightMoves != 0) return;
         rightMoves = 150;
         moves--;
@@ -154,22 +153,25 @@ public class Tank extends GameObject implements BulletDestructor {
         Tank tank1 = World.getInstance().getEnemyTank();
         Tank tank2 = World.getInstance().getMyTank();
 
-        if(bulletPosition >= tank1.getX() - tank1.getWidth() && bulletPosition <= tank1.getX() + tank1.getWidth()) {
+        if (bulletPosition >= tank1.getX() - tank1.getWidth() && bulletPosition <= tank1.getX() + tank1.getWidth()) {
             World.getInstance().getMyEnemy(tank1).scoreUp();
         }
 
-        if(bulletPosition >= tank2.getX() - tank2.getWidth() && bulletPosition <= tank2.getX() + tank2.getWidth()) {
+        if (bulletPosition >= tank2.getX() - tank2.getWidth() && bulletPosition <= tank2.getX() + tank2.getWidth()) {
             World.getInstance().getMyEnemy(tank2).scoreUp();
         }
     }
 
     private void scoreUp() {
         score += 5;
-        System.out.println(score);
     }
 
     public int getPower() {
         return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
     }
 
     public int getAngel() {
@@ -190,5 +192,9 @@ public class Tank extends GameObject implements BulletDestructor {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public boolean hasBullet() {
+        return bullet != null;
     }
 }

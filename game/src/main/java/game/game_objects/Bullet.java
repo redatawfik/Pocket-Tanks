@@ -12,10 +12,9 @@ public class Bullet extends GameObject {
     private final float initialX;
     private final float initialY;
     private final float initialVelocity;
-    private float time;
     private final float[] mesh;
-    private Tank source;
     private final ImageResource[] animations;
+    private float time;
 
     public Bullet(float angel, float initialX, float initialY, float initialVelocity, Tank destructor, Tank tank) {
         this.angel = -angel * DEG2RAD;
@@ -28,7 +27,6 @@ public class Bullet extends GameObject {
         this.setHeight(1f);
         mesh = Ground.getInstance().getMesh();
         setImageResource(new ImageResource("/bullet.png"));
-        this.source = tank;
 
         animations = new ImageResource[16];
         for (int i = 0; i < 16; i++) {
@@ -39,7 +37,6 @@ public class Bullet extends GameObject {
 
     private void shoot() {
 
-        //float deltaTime = GameDisplay.getInstance().getDeltaTime();
         time += .018;
 
         float velX = (float) (initialVelocity * Math.cos(angel));

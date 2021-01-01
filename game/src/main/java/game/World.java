@@ -2,21 +2,24 @@ package game;
 
 
 import game.action.AbstractAction;
+import game.action.ComputerAction;
 import game.action.EnemyAction;
 import game.action.MyAction;
 import game.game_objects.GameObject;
 import game.game_objects.Ground;
 import game.game_objects.Tank;
+import game.menu.GameMode;
 import game.menu.LoadingView;
+import game.networking.Socket;
 
 public class World {
 
     private static World instance;
     private final Tank leftTank;
     private final Tank rightTank;
+    private final Ground ground;
     private Tank myTank;
     private Tank enemyTank;
-    private final Ground ground;
     private boolean isMyTurn;
     private boolean leftTurn = true;
 
@@ -42,22 +45,32 @@ public class World {
     }
 
     public static void destroy() {
-        AbstractAction.getInstance().destroy();
-        EnemyAction.getInstance().destroy();
-        MyAction.getInstance().destroy();
-        LoadingView.getInstance().destroy();
+        Game.stopAnimation();
 
-        Game.getInstance().destroyGame();
-        GameDisplay.getInstance().destroy();
+        AbstractAction.destroy();
+        EnemyAction.destroy();
+        MyAction.destroy();
+        LoadingView.destroy();
 
-        Ground.getInstance().destroy();
+        GameDisplay.destroy();
+        Game.destroyGame();
+
+        Ground.destroy();
+
+        ComputerAction.destroy();
+
+        if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
+            Socket.getInstance().closeConnection();
+        }
 
         instance = null;
     }
 
     public void checkEndOFGame() {
-        if(myTank.getBulletCounter()==0 && enemyTank.getBulletCounter()==0)
-            MyAction.getInstance().endMatch();
+        if (myTank.getBulletCounter() == 0 && enemyTank.getBulletCounter() == 0) {
+            destroy();
+            GameFrame.getInstance().changeDisplayToMenu();
+        }
     }
 
     public Tank getMyTank() {
@@ -155,5 +168,9 @@ public class World {
 
     private void drawBulletAnimation() {
         new GameObject(bulletX, bulletY, 5, 5, bulletAnimations[bulletAnimationIndex], 0).draw();
+    }
+
+    public boolean isBulletExist() {
+        return myTank.hasBullet() || enemyTank.hasBullet();
     }
 }

@@ -4,7 +4,6 @@ import game.GameFrame;
 import game.Sound;
 import game.World;
 import game.game_objects.Tank;
-import game.networking.Site;
 import game.networking.Socket;
 
 public class MyAction implements Action {
@@ -27,24 +26,13 @@ public class MyAction implements Action {
         return instance;
     }
 
-    @Override
-    public void shoot() {
-        if (!World.getInstance().isMyTurn()) return;
-
-        tank.shoot();
-        Sound.playSound(SHOOTING_SOUND_PATH);
-
-        try {
-            socket.sendMessage(Action.SHOOT);
-        } catch (Error ignored) {
-        }
-
-        World.getInstance().setMyTurn(false);
+    public static void destroy() {
+        instance = null;
     }
 
     @Override
     public void moveLeft() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.moveLeft();
         socket.sendMessage(Action.MOVE_LEFT);
@@ -53,7 +41,7 @@ public class MyAction implements Action {
 
     @Override
     public void moveRight() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.moveRight();
         socket.sendMessage(Action.MOVE_RIGHT);
@@ -62,7 +50,7 @@ public class MyAction implements Action {
 
     @Override
     public void canonUp() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.canonUp();
         socket.sendMessage(Action.CANON_UP);
@@ -80,7 +68,7 @@ public class MyAction implements Action {
 
     @Override
     public void powerUp() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.powerUp();
         socket.sendMessage(Action.POWER_UP);
@@ -88,29 +76,34 @@ public class MyAction implements Action {
     }
 
 
-
     @Override
     public void powerDown() {
-        if(!World.getInstance().isMyTurn()) return;
+        if (!World.getInstance().isMyTurn()) return;
 
         tank.powerDown();
         socket.sendMessage(Action.POWER_DOWN);
         GameFrame.getInstance().updateControlPanel();
     }
 
+    @Override
+    public void shoot() {
+        if (!World.getInstance().isMyTurn() || World.getInstance().isBulletExist()) return;
+
+        tank.shoot();
+        Sound.playSound(SHOOTING_SOUND_PATH);
+
+        try {
+            socket.sendMessage(Action.SHOOT);
+        } catch (Error e) {
+            e.printStackTrace();
+        }
+
+        World.getInstance().setMyTurn(false);
+    }
+
     public void endMatch() {
-        Tank tank1 = World.getInstance().getMyTank();
-        Tank tank2 = World.getInstance().getEnemyTank();
-
-        String text = "{\"user1\":\"test\",\"user2\":\"testt\",\"score1\":\"" + tank1.getScore() + "\",\"score2\":\"" + tank2.getScore() + "\"}";
-        Site.sendResult(text);
-
         World.destroy();
 
         GameFrame.getInstance().changeDisplayToMenu();
-    }
-
-    public void destroy() {
-        instance = null;
     }
 }

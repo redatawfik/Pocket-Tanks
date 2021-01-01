@@ -15,15 +15,13 @@ import java.time.LocalTime;
 public class GameDisplay implements GLEventListener {
 
     private static GameDisplay instance;
-
-    private GL2 gl;
+    private final ImageResource backgroundImageResource;
     TextRenderer textRenderer;
-
+    int frames = 0;
+    private GL2 gl;
     private LocalTime startTime;
     private long elapsedSeconds;
     private int elapsedNanos;
-    int frames = 0;
-    private final ImageResource backgroundImageResource;
 
     private GameDisplay() {
         backgroundImageResource = new ImageResource("/game_background_sky.jpg");
@@ -36,6 +34,9 @@ public class GameDisplay implements GLEventListener {
         return instance;
     }
 
+    public static void destroy() {
+        instance = null;
+    }
 
     public void init(GLAutoDrawable glAutoDrawable) {
         startTime = LocalTime.now();
@@ -54,7 +55,6 @@ public class GameDisplay implements GLEventListener {
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
     }
 
-
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
         gl = glAutoDrawable.getGL().getGL2();
@@ -70,7 +70,6 @@ public class GameDisplay implements GLEventListener {
         World.getInstance().update();
 
         World.getInstance().draw();
-
 
         textRenderer.beginRendering(GameFrame.getInstance().getCurrWidth(), GameFrame.getInstance().getCurrHeight());
 
@@ -134,7 +133,6 @@ public class GameDisplay implements GLEventListener {
         gl.glTranslatef(-x, -y, 0);
     }
 
-
     public void reshape(GLAutoDrawable glAutoDrawable, int i, int i1, int i2, int i3) {
 
         GL2 gl = glAutoDrawable.getGL().getGL2();
@@ -152,9 +150,7 @@ public class GameDisplay implements GLEventListener {
     }
 
     public void drawGround(float[] mesh) {
-
-        //System.out.println(mesh);
-        gl.glColor3f(0 / 256.f, 46 / 256.f, 13 / 256.f);
+        gl.glColor3f(97 / 256.f, 92 / 256.f, 78 / 256.f);
 
         for (int i = 0; i < mesh.length - 1; i++) {
             gl.glBegin(GL2.GL_POLYGON);
@@ -164,9 +160,5 @@ public class GameDisplay implements GLEventListener {
             gl.glVertex2d(i, 0);
             gl.glEnd();
         }
-    }
-
-    public void destroy() {
-        instance = null;
     }
 }

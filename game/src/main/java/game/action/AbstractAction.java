@@ -1,14 +1,15 @@
 package game.action;
 
+import game.GameFrame;
 import game.Sound;
 import game.World;
+import game.menu.GameMode;
 
 public class AbstractAction implements Action {
 
     private static AbstractAction instance;
-
-    private World world;
     private final String SHOOTING_SOUND_PATH = "/bullet-sound.au";
+    private final World world;
 
     private AbstractAction() {
         world = World.getInstance();
@@ -21,12 +22,8 @@ public class AbstractAction implements Action {
         return instance;
     }
 
-    @Override
-    public void shoot() {
-        world.getTurnTank().shoot();
-
-        world.setLeftTurn(!world.isLeftTurn());
-        Sound.playSound(SHOOTING_SOUND_PATH);
+    public static void destroy() {
+        instance = null;
     }
 
     @Override
@@ -59,7 +56,27 @@ public class AbstractAction implements Action {
         world.getTurnTank().powerUp();
     }
 
-    public void destroy() {
-        instance = null;
+    @Override
+    public void shoot() {
+        if (World.getInstance().isBulletExist()) return;
+
+        world.getTurnTank().shoot();
+
+        world.setLeftTurn(!world.isLeftTurn());
+
+        Sound.playSound(SHOOTING_SOUND_PATH);
+
+        if (!World.getInstance().isLeftTurn()
+                && GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER) {
+            ComputerAction.getInstance().play();
+        }
+    }
+
+    public void setAngel(float angel) {
+        world.getTurnTank().getCanon().setRotation(angel);
+    }
+
+    public void setPower(int power) {
+        world.getTurnTank().setPower(power);
     }
 }

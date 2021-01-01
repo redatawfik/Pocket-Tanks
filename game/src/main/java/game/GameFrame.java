@@ -6,18 +6,15 @@ import game.menu.GameMode;
 import game.menu.LoadingView;
 import game.menu.Menu;
 
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
-public class GameFrame extends JFrame implements LineListener {
+public class GameFrame extends JFrame {
     private static GameFrame instance;
-    private ControlPanel controlPanel;
-
     private final String MENU_MUSIC_PATH = "/start-music.au";
     private final String GAME_MUSIC_PATH = "/back-music.au";
+    private ControlPanel controlPanel;
     private JPanel gamePanel;
     private GameMode gameMode;
 
@@ -29,10 +26,14 @@ public class GameFrame extends JFrame implements LineListener {
         init();
     }
 
+    public static GameFrame getInstance() {
+        if (instance == null)
+            instance = new GameFrame();
+        return instance;
+    }
+
     private void init() {
         setTitle("Pocket Tanks");
-
-        //removeAll();
 
         //kill the process when the JFrame is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,26 +60,15 @@ public class GameFrame extends JFrame implements LineListener {
         );
     }
 
-    public static GameFrame getInstance() {
-        if (instance == null)
-            instance = new GameFrame();
-        return instance;
-    }
-
     public void changeDisplayToGame(GLCanvas canvas) {
         getContentPane().removeAll();
 
         gamePanel = new JPanel(new BorderLayout());
 
-        //BoxLayout layoutMgr = new BoxLayout(panel, BoxLayout.X_AXIS);
-        //panel.setLayout(layoutMgr);
-
         controlPanel = ControlPanel.getInstance();
 
-        //canvas.setPreferredSize(new Dimension(getWindowWidth(), getWindowHeight()));
         gamePanel.add(canvas);
         gamePanel.add(controlPanel, BorderLayout.SOUTH);
-
 
         getContentPane().add(gamePanel);
 
@@ -101,7 +91,6 @@ public class GameFrame extends JFrame implements LineListener {
         pack();
 
         Sound.playBackgroundSound(MENU_MUSIC_PATH);
-      //  init();
     }
 
 
@@ -126,7 +115,8 @@ public class GameFrame extends JFrame implements LineListener {
             } else {
                 angel *= -1;
             }
-        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER) {
+        } else if (GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_MULTIPLAYER ||
+                GameFrame.getInstance().getGameMode() == GameMode.OFFLINE_COMPUTER) {
             tank = World.getInstance().getTurnTank();
             angel = tank.getAngel();
             if (!World.getInstance().isLeftTurn()) {
@@ -141,11 +131,6 @@ public class GameFrame extends JFrame implements LineListener {
         controlPanel.setPower(tank.getPower());
         controlPanel.setAngel(angel);
         controlPanel.setNumOfMoves(tank.getMoves());
-    }
-
-    @Override
-    public void update(LineEvent event) {
-
     }
 
     public void close() {
