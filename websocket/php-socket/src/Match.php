@@ -13,20 +13,23 @@ class Match implements MessageComponentInterface
     public function __construct()
     {
         $this->clients = new \SplObjectStorage;
+        $this->user_map = array();
         echo "Server Started.";
     }
 
     public function onOpen(ConnectionInterface $conn)
     {
-        // Store the new connection to send messages to later
         if (sizeof($this->clients) === 0) {
+            // Store the new connection to send messages to later
             $this->clients->attach($conn);
         } else {
             $host = $this->clients->current();
-            $this->user_map[1] = array($host, $conn);
+            array_push($this->user_map, array($host, $conn));
 
             $host->send("left");
             $conn->send("right");
+
+            $this->clients->detach($host);
         }
 
         echo "New connection! ({$conn->resourceId})\n";
@@ -34,18 +37,20 @@ class Match implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
-        foreach ($this->user_map as $match) {
+        for ($i = 0; $i < sizeof($this->user_map); $i++) {
+            $match = $this->user_map[$i];
+
             $client1 = $match[0];
             $client2 = $match[1];
 
             if ($client1 === $from) {
                 $client2->send($msg);
-                echo sprintf('Connection %d sending message "%s" to %d other connection' . "\n"
+                echo sprintf('Connection %d sending message "%s" to %d' . "\n"
                     , $client1->resourceId, $msg, $client2->resourceId);
                 break;
             } else if ($client2 === $from) {
                 $client1->send($msg);
-                echo sprintf('Connection %d sending message "%s" to %d other connection' . "\n"
+                echo sprintf('Connection %d sending message "%s" to %d' . "\n"
                     , $client2->resourceId, $msg, $client1->resourceId);
                 break;
             }
@@ -54,26 +59,25 @@ class Match implements MessageComponentInterface
 
     public function onClose(ConnectionInterface $conn)
     {
-        foreach ($this->user_map as $match) {
+
+        for ($i = 0; $i < sizeof($this->user_map); $i++) {
+            $match = $this->user_map[$i];
+
             $client1 = $match[0];
             $client2 = $match[1];
 
             if ($client1 === $conn) {
                 $client2->send("CLOSE");
-                echo sprintf('Connection %d sending message "%s" to %d other connection' . "\n"
+                echo sprintf('Connection %d sending message "%s" to %d' . "\n"
                     , $client1->resourceId, "CLOSE", $client2->resourceId);
                 break;
             } else if ($client2 === $conn) {
                 $client1->send("CLOSE");
-                echo sprintf('Connection %d sending message "%s" to %d other connection' . "\n"
+                echo sprintf('Connection %d sending message "%s" to %d' . "\n"
                     , $client2->resourceId, "CLOSE", $client1->resourceId);
                 break;
             }
         }
-
-        // The connection is closed, remove it, as we can no longer send it messages
-        $this->clients->detach($conn);
-        unset($this->user_map);
 
         echo "Connection {$conn->resourceId} has disconnected\n";
     }
