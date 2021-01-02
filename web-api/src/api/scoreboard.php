@@ -6,7 +6,8 @@ $userController = new userController();
 
 $result = array();
 $users = $userController->getAll();
-foreach ($users as $userInfo){
-    $result[] = json_decode($userInfo->toJson());
+for($i = 0; $i < 10; $i++){
+    $result[] = json_decode($users[$i]->toJson());
 }
+
 echo json_encode($result);

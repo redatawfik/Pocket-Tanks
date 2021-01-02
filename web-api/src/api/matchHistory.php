@@ -13,6 +13,7 @@ if (isset($_SESSION['userid'])) {
     $matchController = new matchController();
     $result = array();
 
+
     foreach ($matchController->getUserMatches($id) as $match) {
         $userContoller = new userController();
         $winner = $userContoller->get($match->getWinnerId());
@@ -29,7 +30,7 @@ if (isset($_SESSION['userid'])) {
 
         $result[] = $x;
     }
-
+    header('Content-Type: application/json');
     echo json_encode($result);
 } else {
     http_response_code(400);

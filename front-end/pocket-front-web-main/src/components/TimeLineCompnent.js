@@ -1,19 +1,29 @@
 import { Container } from '@material-ui/core'
 import Axios from 'axios'
 import React, { memo, useEffect, useState } from 'react'
+import { Redirect ,useHistory } from 'react-router-dom'
 import {Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
+import axios from 'axios'
+
 import GameCompenent from './GameCompenent'
 const mapStateToProps = ({user}) => ({
     user
 })
 export default connect(mapStateToProps)(function TimeLineCompnent({user , dispatch}) {
     const [data , setdata] = useState([])
+    const history = useHistory();
     useEffect( async () => {
-        const {data , status} = await Axios.get('http://localhost:63342/web-api/src/api/matchHistory.php', {withCredentials: true})
-        if(status == 200) {
-            setdata(data)
-        }
+        axios.get("http://localhost:63342/web-api/src/api/matchHistory.php" , {withCredentials:true})
+            .then(function (response) {
+                //handle success
+                setdata(response.data)
+
+            })
+            .catch(function (response) {
+                //handle error
+                history.push('/Auth');
+            });
     } , [])
     return (
         <div style = {{width : '46%' , backgroundColor : 'rgba(0,0,0,.5)' , borderRadius : 50,
