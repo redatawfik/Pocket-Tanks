@@ -9,19 +9,18 @@ export default memo(function Regsteir() {
     const [userName , setuserName] = useState('');
     const [pass , setpass] = useState('')
     async function handleSubmit() {
-        const {data , status} = await axios.post("http://localhost:63342/web-api/src/api/register.php" , {
+        axios.post("http://localhost:63342/web-api/src/api/register.php" , {
             username : userName,    
             email,
-            password : pass
-        })
-        if(status == "201") {
-            alert("Sucess, Process to login");
-            history.push('/')
-        }
-        else{
-            
-            alert(data['Msg']);
-        }
+            password : pass}, {withCredentials:true})
+            .then(function (response) {
+                //handle success
+                alert("User Created Go to login");
+            })
+            .catch(function (response) {
+                //handle error
+                alert(response.response.data['Msg']);
+            });
     }
     return (
         <div style = {{width : "100%" , display : 'flex' , justifyContent : 'center'}}  >
@@ -42,7 +41,7 @@ export default memo(function Regsteir() {
                     value = {pass}
                     onChange = {e => {setpass(e.target.value)}}
                     style = {{width : '50%'}} id="filled-basic" label="Password" 
-                    variant="filled" type = "Password" />
+                    variant="filled" data = "Password" />
                     <Button 
                     onClick = {handleSubmit}
                     color = "primary" variant = "outlined">

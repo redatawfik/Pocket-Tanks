@@ -15,6 +15,7 @@
 /front-end/pocket-front-web-main/.env.development.local
 /front-end/pocket-front-web-main/.env.test.local
 /front-end/pocket-front-web-main/.env.production.local
+front-end/pocket-front-web-main/.eslintcache
 
 /front-end/pocket-front-web-main/npm-debug.log*
 /front-end/pocket-front-web-main/yarn-debug.log*

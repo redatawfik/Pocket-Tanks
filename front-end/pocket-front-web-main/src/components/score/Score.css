@@ -1,0 +1,70 @@
+.score-container {
+  float: left;
+  width: 60%;
+  position: relative;
+  height: 65px;
+}
+
+.score-action {
+  border: none;
+  position: absolute;
+  font-weight: bold;
+  color: #FAFAFA;
+  display: block;
+  padding: 20px 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.score-action.increment {
+  background: #66BB6A;
+  right: 0;
+  top: 0;
+}
+
+.score-action.increment:hover {
+  background: #549d59;
+  cursor: pointer;
+}
+
+.score-action.decrement {
+  background: #ef5350;
+  left: 0;
+  top: 0;
+}
+
+.score-action.decrement:hover {
+  background: #c44442;
+  cursor: pointer;
+}
+
+.score {
+  background: #2b2b2b;
+  color: #FAFAFA;
+  text-align: center;
+  font-family: monospace;
+  padding: 10px;
+  font-size: 1.25em;
+  cursor: pointer;
+  padding: 20px;
+  height: 65px;
+}
+
+.edit-score {
+  display: none;
+  text-align: center;
+  font-family: monospace;
+  padding: 20px;
+  height: 65px;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 992px) {
+  .score-container {
+     width: 30%;
+   }
+} 

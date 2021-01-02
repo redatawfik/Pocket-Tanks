@@ -5,16 +5,19 @@ import {Redirect , Route, Switch} from 'react-router-dom'
 import { BrowserRouter } from "react-router-dom";
 import HomeScreen from './screens/HomeScreen';
 import Auth from './screens/Auth';
-function App() {
-  
+import { connect } from 'react-redux';
+import {store} from './redux/storeCaller'
+function App({user}) {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomeScreen} />
-        <Route path="/Auth" component={Auth} />
+        <Route path="/auth" component={Auth} />
     </Switch>
     </BrowserRouter>
   );
 }
-
-export default App;
+const mapStateToProps = ({user}) => ({
+  user
+})
+export default connect(mapStateToProps)(App)

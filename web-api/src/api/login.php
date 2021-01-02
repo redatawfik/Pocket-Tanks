@@ -24,6 +24,7 @@ else{
 
         if (sizeof($m) < 1) {
             http_response_code(400);
+            header('Content-Type: application/json');
             $response = array('Status' => 'Error',
                 'Msg' => 'Email format Not valid');
             echo json_encode($response);

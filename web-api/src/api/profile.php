@@ -9,7 +9,6 @@ if(isset($_SESSION['userid'])){
     $data = json_decode(file_get_contents('php://input'), true);
     $userController = new userController();
 if($data == null){
-
     echo $userController->get($id)->toJson();
 }
 else {
