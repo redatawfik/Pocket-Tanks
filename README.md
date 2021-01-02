@@ -42,5 +42,6 @@ The feature can be split into two main categories:
 ### Database design
 ![database-diagram](https://user-images.githubusercontent.com/13278795/103447942-e07e9a00-4c9a-11eb-8427-a54db50dda1c.png)
 
-
+## License & Copyright
+Licensed under the [BSD 2-Clause License](LICENSE)
 
