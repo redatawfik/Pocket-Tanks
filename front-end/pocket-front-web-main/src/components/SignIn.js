@@ -1,28 +1,44 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState , useEffect } from 'react'
 import { Button, TextField } from '@material-ui/core'
 import axios from 'axios'
 import './signin.css'
 import { Redirect ,useHistory } from 'react-router-dom'
-export default memo(function SignIn() {
+import { connect } from 'react-redux'
+import {setAuth, setTest} from '../redux/actions/rootAction'
+
+const SignIn = function ({dispatch , user}) {
     const history = useHistory();
     const [email , setemail] = useState('');
     const [pass , setpass] = useState('')
+    useEffect(() => {
+        console.log(user);
+    }, )
     async function handleSubmit() {
-        const {data, status} = await axios.post("http://localhost:63342/web-api/src/api/login.php" , {
+        axios.post("http://localhost:63342/web-api/src/api/login.php" , {
             email,
-            password : pass
-        })
-        if(status == "200" && data['Status'] !== 'Error') {
-            alert('userid is ' + data['id'] + '\n' + 
-            'username is ' + data['username'] + '\n'+
-            'email is ' + data['email']);
-            console.log(data);
+            password : pass}, {withCredentials:true})
+            .then(function (response) {
+                //handle success
+                dispatch(setAuth('authed'))
+                history.push('/')
+            })
+            .catch(function (response) {
+                //handle error
+                alert(response.response.data['Msg']);
+            });
+        /*const {data, status} = await axios.post("http://localhost:63342/web-api/src/api/login.php" , {
+            email,
+            password : pass,
+            withCredentials:true})
+        if(status == "200") {
+            await dispatch(setAuth(data.username))
             history.push('/')
-        }
-        else{
-            console.log(data);
-            alert(data['Msg']);
-        }
+        } else {
+            alert(data);
+           alert(data["Msg"])
+
+        }*/
+        
     }
     return (
         <div style = {{width : "100%" , display : 'flex' , justifyContent : 'center'}}  >
@@ -49,4 +65,8 @@ export default memo(function SignIn() {
             </div>
         </div>
     )
+}
+const mapStateToProps = ({user , test}) => ({
+    user : user,
 })
+export default connect(mapStateToProps)(SignIn)

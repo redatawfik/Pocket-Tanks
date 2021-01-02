@@ -10,7 +10,7 @@ export default memo(function Auth() {
         setauth(!authChoise);
     }
     return (
-        <div>
+        <div className="home-holder">
             <div className = "btn-holder">
                 <Button 
                 onClick = {changeAuth}
