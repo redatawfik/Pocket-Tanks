@@ -52,7 +52,7 @@ class matchesDao extends dbContext
         $matchInfo = $mysqlExecutor->get_result();
         if(!$matchInfo) return null;
         $result =  $matchInfo->fetch_all();
-
+        $matches = array();
         foreach ($result as $matchInfo)
             $matches[] = Match::Build($matchInfo[1], $matchInfo[2], $matchInfo[3], $matchInfo[4]);
         $this->connection->close();

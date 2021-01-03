@@ -39,6 +39,7 @@ class userDao extends dbContext
             $result = $xx[0];
             $user = User::Build($result[0], $result[2], $result[1]);
             $this->connection->close();
+            $user->setScore($result[4]);
             return $user;
         }
         return null;
@@ -65,7 +66,7 @@ class userDao extends dbContext
 
         $params = [$user->getUsername(),
             $user->getEmail(),
-            $user->imageUrl(),
+            null,
             $user->getScore(),
             $user->getID()];
         $types = "sssii";
