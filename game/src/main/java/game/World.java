@@ -10,6 +10,7 @@ import game.game_objects.Ground;
 import game.game_objects.Tank;
 import game.menu.GameMode;
 import game.menu.LoadingView;
+import game.networking.Site;
 import game.networking.Socket;
 
 import java.util.Timer;
@@ -35,10 +36,12 @@ public class World {
     private final ImageResource arrowImageResource;
 
     private World() {
+        Socket.getInstance().sendMessage("USERNAME:"+Site.getUserName());
         ground = Ground.getInstance();
         int tX = 15;
         int tY = 10;
         leftTank = new Tank(tX, tY, "m1.png", -45);
+
         rightTank = new Tank(tX + 65, tY, "m1.png", -135);
         arrow = new GameObject();
         arrowImageResource = new ImageResource("/arrow.png");
@@ -81,8 +84,23 @@ public class World {
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            GameFrame.getInstance().showResultView(leftTank.getScore() > rightTank.getScore() ?
-                                    "Left tank won" : "Right tank won");
+                            String msg ="";
+
+                            if(leftTank.getScore() > rightTank.getScore())
+                                msg = leftTank.getName() + " won";
+                            else if(leftTank.getScore() < rightTank.getScore())
+                                    msg = rightTank.getName() + " won";
+                            else
+                                msg = "TIE";
+                            String result = "{\"user1\":";
+                            result += "\"" + rightTank.getName() + "\",";
+                            result += "\"user2\":" + "\""+leftTank.getName()+ "\",";
+                            result += "\"score1\":" + "\""+rightTank.getScore() + "\",";
+                            result += "\"score2\":" + "\""+leftTank.getScore() + "\"}";
+                            System.out.println(result);
+                            Socket.getInstance().sendMessage(msg);
+                            Socket.getInstance().sendMessage(result);
+                            GameFrame.getInstance().showResultView(msg);
                         }
                     },
                     5000
@@ -146,12 +164,18 @@ public class World {
     public void setMeLeft() {
         myTank = leftTank;
         enemyTank = rightTank;
+        rightTank.setName(GameFrame.getInstance().getEnemyName());
+        myTank.setName(Site.getUserName());
+        leftTank.setName(Site.getUserName());
         isMyTurn = true;
     }
 
     public void setMeRight() {
         myTank = rightTank;
+        myTank.setName(Site.getUserName());
+        rightTank.setName(Site.getUserName());
         enemyTank = leftTank;
+        leftTank.setName(GameFrame.getInstance().getEnemyName());
         isMyTurn = false;
     }
 

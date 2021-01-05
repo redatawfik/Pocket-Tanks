@@ -39,6 +39,7 @@ class userDao extends dbContext
             $result = $xx[0];
             $user = User::Build($result[0], $result[2], $result[1]);
             $this->connection->close();
+            $user->setScore($result[4]);
             return $user;
         }
         return null;
@@ -65,7 +66,7 @@ class userDao extends dbContext
 
         $params = [$user->getUsername(),
             $user->getEmail(),
-            $user->imageUrl(),
+            null,
             $user->getScore(),
             $user->getID()];
         $types = "sssii";
@@ -86,6 +87,7 @@ class userDao extends dbContext
         $result = $sql->get_result();
         if($result->num_rows == 0){
             http_response_code(401);
+            header('Content-Type: application/json');
             echo json_encode(array("Status" => "Error", "Msg" => 'Wrong info'));
         }else {
             $result = $result->fetch_all()[0];
@@ -112,6 +114,7 @@ class userDao extends dbContext
         }
         else{
             http_response_code(409);
+            header('Content-Type: application/json');
             echo json_encode(array("Status" => "Error", "Msg" => 'this Username or Email already taken'));
         }
 

@@ -1,6 +1,7 @@
 package game;
 
 import game.game_objects.Ground;
+import game.menu.LoginMenu;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,7 +13,6 @@ public class Main {
     }
 
     public static void initializeGuestGame() {
-
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override

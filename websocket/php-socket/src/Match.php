@@ -28,31 +28,59 @@ class Match implements MessageComponentInterface
 
             $host->send("left");
             $conn->send("right");
-
             $this->clients->detach($host);
         }
 
         echo "New connection! ({$conn->resourceId})\n";
     }
+    public function sendResult($result){
+        // API URL
+        $url = 'http://localhost:63343/web-api/src/api/signMatch.php';
 
+        // Create a new cURL resource
+        $ch = curl_init($url);
+
+        // Setup request to send json via POST
+        $payload = $result;
+
+        // Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+        // Set the content type to application/json
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+
+        // Return response instead of outputting
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute the POST request
+        $result = curl_exec($ch);
+
+        // Close cURL resource
+        curl_close($ch);
+    }
     public function onMessage(ConnectionInterface $from, $msg)
     {
-        for ($i = 0; $i < sizeof($this->user_map); $i++) {
-            $match = $this->user_map[$i];
+        if(str_contains($msg, "{")){
+            $this->sendResult($msg);
+        }
+        else{
+            for ($i = 0; $i < sizeof($this->user_map); $i++) {
+                $match = $this->user_map[$i];
 
-            $client1 = $match[0];
-            $client2 = $match[1];
+                $client1 = $match[0];
+                $client2 = $match[1];
 
-            if ($client1 === $from) {
-                $client2->send($msg);
-                echo sprintf('Connection %d sending message "%s" to %d' . "\n"
-                    , $client1->resourceId, $msg, $client2->resourceId);
-                break;
-            } else if ($client2 === $from) {
-                $client1->send($msg);
-                echo sprintf('Connection %d sending message "%s" to %d' . "\n"
-                    , $client2->resourceId, $msg, $client1->resourceId);
-                break;
+                if ($client1 === $from) {
+                    $client2->send($msg);
+                    echo sprintf('Connection %d sending message "%s" to %d' . "\n"
+                        , $client1->resourceId, $msg, $client2->resourceId);
+                    break;
+                } else if ($client2 === $from) {
+                    $client1->send($msg);
+                    echo sprintf('Connection %d sending message "%s" to %d' . "\n"
+                        , $client2->resourceId, $msg, $client1->resourceId);
+                    break;
+                }
             }
         }
     }

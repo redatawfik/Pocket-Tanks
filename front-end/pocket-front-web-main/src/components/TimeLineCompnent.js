@@ -17,6 +17,7 @@ export default connect(mapStateToProps)(function TimeLineCompnent({user , dispat
         axios.get("http://localhost:63342/web-api/src/api/matchHistory.php" , {withCredentials:true})
             .then(function (response) {
                 //handle success
+                console.log(response.data);
                 setdata(response.data)
 
             })

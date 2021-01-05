@@ -5,6 +5,7 @@ import game.game_objects.Tank;
 import game.menu.GameMode;
 import game.menu.LoadingView;
 import game.menu.Menu;
+import game.networking.Socket;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,16 @@ public class GameFrame extends JFrame {
     private ControlPanel controlPanel;
     private JPanel gamePanel;
     private GameMode gameMode;
+    private String userName;
+    private String enemyName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     private GameFrame() {
         SwingUtilities.invokeLater(
@@ -32,6 +43,13 @@ public class GameFrame extends JFrame {
         return instance;
     }
 
+    public static GameFrame getInstance(String username){
+        if (instance == null) {
+            instance = new GameFrame();
+            instance.setUserName(username);
+        }
+        return instance;
+    }
     private void init() {
         setTitle("Pocket Tanks");
 
@@ -96,7 +114,6 @@ public class GameFrame extends JFrame {
 
     public void showLoadingSpinner() {
         getContentPane().removeAll();
-
         getContentPane().add(LoadingView.getInstance());
         revalidate();
     }
@@ -135,7 +152,6 @@ public class GameFrame extends JFrame {
 
     public void showResultView(String result) {
         getContentPane().removeAll();
-
         getContentPane().add(new ResultView(result));
         revalidate();
     }
@@ -167,6 +183,15 @@ public class GameFrame extends JFrame {
 
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
+    }
+
+    public void setEnemayname(String name){
+        controlPanel.setEnEmyName(name);
+        this.enemyName = name;
+    }
+
+    public String getEnemyName(){
+        return this.enemyName;
     }
 }
 

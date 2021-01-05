@@ -16,6 +16,15 @@ public class Tank extends GameObject implements BulletDestructor {
     private int rightMoves;
     private int power = 40;
     private int score;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Tank(float x, float y, String canonImage, float angle) {
         this.canon = new GameObject(x + .5f, y - .1f, 5, 5,

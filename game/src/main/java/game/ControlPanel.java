@@ -11,6 +11,7 @@ public class ControlPanel extends JPanel {
     private JLabel angleLabel;
     private JLabel numOfMovesLabel;
     private JButton pauseButton;
+    private JLabel enamyName;
 
     private ControlPanel() {
         init();
@@ -50,9 +51,14 @@ public class ControlPanel extends JPanel {
             }
         });
 
+        enamyName = new JLabel();
+        enamyName.setBackground(Color.ORANGE);
+        enamyName.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+
         add(powerLabel);
         add(angleLabel);
         add(numOfMovesLabel);
+        add(enamyName);
         add(pauseButton);
     }
 
@@ -70,6 +76,9 @@ public class ControlPanel extends JPanel {
         }
     }
 
+    public void setEnEmyName(String name){
+        enamyName.setText("Enemy Name: " + name);
+    }
     public void setNumOfMoves(int movesLeft) {
         numOfMovesLabel.setText("Moves left: " + movesLeft);
     }
