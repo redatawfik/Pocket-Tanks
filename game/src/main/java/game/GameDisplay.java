@@ -98,7 +98,7 @@ public class GameDisplay implements GLEventListener {
         return deltaTime < 0 ? 0 : deltaTime / 1000000000f;
     }
 
-    public void drawImage(ImageResource image, float x, float y, float width, float height, double rotation) {
+    public void drawImage(ImageResource image, float x, float y, float width, float height, float rotation) {
 
         Texture texture = image.getTexture();
 
