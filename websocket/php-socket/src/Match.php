@@ -35,7 +35,7 @@ class Match implements MessageComponentInterface
     }
     public function sendResult($result){
         // API URL
-        $url = 'http://localhost:63343/web-api/src/api/signMatch.php';
+        $url = 'http://localhost:63342/web-api/src/api/signMatch.php';
 
         // Create a new cURL resource
         $ch = curl_init($url);

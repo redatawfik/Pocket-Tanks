@@ -52,7 +52,7 @@ public class Site {
     public static JSONObject login(String email, String password){
         try{
             //send login request
-            URL url = new URL("http://localhost:63343/web-api/src/api/login.php");
+            URL url = new URL("http://localhost:63342/web-api/src/api/login.php");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -77,7 +77,7 @@ public class Site {
                 cookie = cookie.split(";")[0].split("=")[1];
 
                 //get profile with the sessionID
-                url = new URL("http://localhost:63343/web-api/src/api/profile.php");
+                url = new URL("http://localhost:63342/web-api/src/api/profile.php");
                 con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("GET");
                 con.setRequestProperty("Cookie", "PHPSESSID="+cookie);

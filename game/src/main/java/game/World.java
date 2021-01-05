@@ -36,7 +36,12 @@ public class World {
     private final ImageResource arrowImageResource;
 
     private World() {
-        Socket.getInstance().sendMessage("USERNAME:"+Site.getUserName());
+        try {
+            Socket.getInstance().sendMessage("USERNAME:" + Site.getUserName());
+        }
+        catch (Exception ex){
+
+        }
         ground = Ground.getInstance();
         int tX = 15;
         int tY = 10;
@@ -85,11 +90,17 @@ public class World {
                         @Override
                         public void run() {
                             String msg ="";
-
-                            if(leftTank.getScore() > rightTank.getScore())
+                            boolean winner = false;
+                            if(leftTank.getScore() > rightTank.getScore()) {
                                 msg = leftTank.getName() + " won";
-                            else if(leftTank.getScore() < rightTank.getScore())
-                                    msg = rightTank.getName() + " won";
+                                if(leftTank.getScore() == myTank.getScore())
+                                    winner = true;
+                            }
+                            else if(leftTank.getScore() < rightTank.getScore()) {
+                                msg = rightTank.getName() + " won";
+                                if(rightTank.getScore() == myTank.getScore())
+                                    winner = true;
+                            }
                             else
                                 msg = "TIE";
                             String result = "{\"user1\":";
@@ -99,7 +110,8 @@ public class World {
                             result += "\"score2\":" + "\""+leftTank.getScore() + "\"}";
                             System.out.println(result);
                             Socket.getInstance().sendMessage(msg);
-                            Socket.getInstance().sendMessage(result);
+                            if(winner)
+                                Socket.getInstance().sendMessage(result);
                             GameFrame.getInstance().showResultView(msg);
                         }
                     },

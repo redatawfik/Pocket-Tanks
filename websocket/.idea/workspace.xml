@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="82321202-4f16-4300-977d-471f1a750ed5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../game/src/main/java/game/networking/Site.java" beforeDir="false" afterPath="$PROJECT_DIR$/../game/src/main/java/game/networking/Site.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php-socket/src/Match.php" beforeDir="false" afterPath="$PROJECT_DIR$/php-socket/src/Match.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/php-socket/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/php-socket/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/composer" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/promise-timer" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/php-socket/vendor/ratchet/rfc6455" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1meAwC9q8mh4eYVImddszcGjoBr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82321202-4f16-4300-977d-471f1a750ed5" name="Default Changelist" comment="" />
+      <created>1609843921438</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1609843921438</updated>
+      <workItem from="1609843923003" duration="306000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
