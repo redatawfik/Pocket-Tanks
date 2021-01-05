@@ -53,9 +53,9 @@ public class Ground {
                     mesh[j] = (mesh[j - 1] + mesh[j + 1]) / 2;
                 }
             }
-            if (mesh[i] >= maxHight){
+            if (mesh[i] >= maxHight) {
                 maxHight = mesh[i];
-                indexOfMax = i+1;
+                indexOfMax = i + 1;
             }
         }
     }

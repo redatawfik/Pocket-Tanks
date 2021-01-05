@@ -13,6 +13,7 @@ public class Menu extends JPanel implements ActionListener {
 
     private static Menu instance;
     private final JButton startOnlineButton;
+    private final JButton loginButton;
     private final JButton startLocalButton;
     private final JButton startComputerButton;
     private final JButton exitButton;
@@ -32,12 +33,18 @@ public class Menu extends JPanel implements ActionListener {
         title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 100));
         titlePanel.add(title);
 
-        JPanel startOnlineMatchPanel = new JPanel();
+        JPanel startOnlineMatchPanel = new JPanel(new GridLayout(1, 2));
         startOnlineMatchPanel.setBackground(new Color(0, 0, 0, 0));
         startOnlineButton = new JButton("Start Online Match");
         startOnlineButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
         startOnlineButton.addActionListener(this);
+
+        loginButton = new JButton("Login");
+        startOnlineButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+        startOnlineButton.addActionListener(this);
+
         startOnlineMatchPanel.add(startOnlineButton);
+        startOnlineMatchPanel.add(loginButton);
 
         JPanel startLocalGamePanel = new JPanel();
         startLocalGamePanel.setBackground(new Color(0, 0, 0, 0));

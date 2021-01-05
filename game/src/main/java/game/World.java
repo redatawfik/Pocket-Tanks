@@ -20,19 +20,17 @@ public class World {
     private final Tank leftTank;
     private final Tank rightTank;
     private final Ground ground;
+    private final GameObject arrow;
+    private final ImageResource arrowImageResource;
     private Tank myTank;
     private Tank enemyTank;
     private boolean isMyTurn;
     private boolean leftTurn = true;
-
     // Bullet animations
     private int bulletAnimationIndex = -1;
     private boolean shouldAnimateBullet;
     private ImageResource[] bulletAnimations;
     private float bulletX, bulletY;
-
-    private final GameObject arrow;
-    private final ImageResource arrowImageResource;
 
     private World() {
         ground = Ground.getInstance();

@@ -59,7 +59,7 @@ class Match implements MessageComponentInterface
 
     public function onClose(ConnectionInterface $conn)
     {
-
+        
         for ($i = 0; $i < sizeof($this->user_map); $i++) {
             $match = $this->user_map[$i];
 
