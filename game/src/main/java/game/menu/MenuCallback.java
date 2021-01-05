@@ -20,7 +20,6 @@ public class MenuCallback {
             GameFrame.getInstance().setGameMode(GameMode.ONLINE);
             Socket.getInstance().connect();
             GameFrame.getInstance().showLoadingSpinner();
-            System.out.println(Site.getUserName());
         } else {
             LoginFrame.getInstance();
         }

@@ -58,8 +58,7 @@ public class ResultView extends JPanel implements ActionListener {
 
                 // Winner client sends results
                 if (World.getInstance().getMyTank().getScore() >= World.getInstance().getEnemyTank().getScore()) {
-                    // To Be formate as a JSON object
-                    System.out.println("/////////////////////////////////////////////////");
+                    // To Be formatted as a JSON object
                     Site.sendResult(Site.getUserName() + Site.getEnemyUsername() +
                             World.getInstance().getMyTank().getScore() +
                             World.getInstance().getEnemyTank().getScore());

@@ -69,14 +69,10 @@ public class World {
         }
 
         instance = null;
-
-        System.out.println("end the game");
     }
 
     public void checkEndOFGame() {
         if (myTank.getBulletCounter() == 0 && enemyTank.getBulletCounter() == 0) {
-//            destroy();
-//            GameFrame.getInstance().changeDisplayToMenu();
             new Timer().schedule(
                     new java.util.TimerTask() {
                         @Override

@@ -67,8 +67,6 @@ public class Main {
                 levels[0]
         );
 
-        System.out.println(result);
-
         Ground.getInstance().generateMap();
         World.getInstance().setMeLeft();
 
