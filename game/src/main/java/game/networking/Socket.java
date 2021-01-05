@@ -4,6 +4,8 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketAdapter;
 import com.neovisionaries.ws.client.WebSocketException;
 import com.neovisionaries.ws.client.WebSocketFactory;
+import game.ControlPanel;
+import game.GameFrame;
 import game.Main;
 import game.action.Action;
 import game.action.EnemyAction;
@@ -74,6 +76,11 @@ public class Socket {
             int x = Integer.parseInt(arr[1]);
             float y = Float.parseFloat(arr[2]);
             Ground.getInstance().setYAtX(x, y);
+        }
+        else if (message.contains("USERNAME")){
+            String name = message.substring(9);
+            GameFrame.getInstance().setEnemayname(name);
+            System.out.println(message);
         }
     }
 

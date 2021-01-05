@@ -87,6 +87,7 @@ class userDao extends dbContext
         $result = $sql->get_result();
         if($result->num_rows == 0){
             http_response_code(401);
+            header('Content-Type: application/json');
             echo json_encode(array("Status" => "Error", "Msg" => 'Wrong info'));
         }else {
             $result = $result->fetch_all()[0];
@@ -113,6 +114,7 @@ class userDao extends dbContext
         }
         else{
             http_response_code(409);
+            header('Content-Type: application/json');
             echo json_encode(array("Status" => "Error", "Msg" => 'this Username or Email already taken'));
         }
 

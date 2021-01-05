@@ -2,6 +2,7 @@ package game.menu;
 
 import game.GameFrame;
 import game.Main;
+import game.networking.Site;
 import game.networking.Socket;
 
 
@@ -15,9 +16,14 @@ public class MenuCallback {
     }
 
     public void startOnlineGame() {
-        GameFrame.getInstance().setGameMode(GameMode.ONLINE);
-        Socket.getInstance().connect();
-        GameFrame.getInstance().showLoadingSpinner();
+        if(Site.getLoggedIn()) {
+            GameFrame.getInstance().setGameMode(GameMode.ONLINE);
+            Socket.getInstance().connect();
+            GameFrame.getInstance().showLoadingSpinner();
+        }
+        else{
+            new LoginMenu();
+        }
     }
 
     public void startLocalGame() {
