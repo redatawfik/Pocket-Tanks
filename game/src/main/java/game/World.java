@@ -69,6 +69,8 @@ public class World {
         }
 
         instance = null;
+
+        System.out.println("end the game");
     }
 
     public void checkEndOFGame() {
@@ -204,7 +206,7 @@ public class World {
     }
 
     private void drawBulletAnimation() {
-        new GameObject(bulletX, bulletY, 5, 5, bulletAnimations[bulletAnimationIndex], 0).draw();
+        new GameObject(bulletX, bulletY, 10, 10, bulletAnimations[bulletAnimationIndex], 0).draw();
     }
 
     public boolean isBulletExist() {

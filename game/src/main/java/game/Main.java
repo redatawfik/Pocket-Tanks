@@ -1,7 +1,9 @@
 package game;
 
+import game.action.ComputerAction;
 import game.game_objects.Ground;
 
+import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,11 +55,26 @@ public class Main {
     }
 
     public static void initializeVersusComputerGame() {
+        String[] levels = {"Easy", "Normal", "Hard"};
+
+        String result = (String) JOptionPane.showInputDialog(
+                GameFrame.getInstance(),
+                "Select level",
+                "Game level",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                levels,
+                levels[0]
+        );
+
+        System.out.println(result);
+
         Ground.getInstance().generateMap();
         World.getInstance().setMeLeft();
 
         Game game = Game.getInstance();
         GameFrame.getInstance().changeDisplayToGame(game);
         game.start();
+        ComputerAction.setDifficulty(result);
     }
 }

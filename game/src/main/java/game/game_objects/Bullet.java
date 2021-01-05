@@ -39,8 +39,8 @@ public class Bullet extends GameObject {
 
         time += 0.04;
 
-        float velX = (float) (initialVelocity * Math.cos(angle));
-        float velY = (float) (initialVelocity * Math.sin(angle));
+        float velX = (float) (initialVelocity * .5 * Math.cos(angle));
+        float velY = (float) (initialVelocity * .5 * Math.sin(angle));
 
         float currVelo = velY + g * time;
 

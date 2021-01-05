@@ -1,5 +1,8 @@
 package game;
 
+import game.menu.GameMode;
+import game.networking.Site;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -50,6 +53,19 @@ public class ResultView extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == closeButton) {
+            // Notify websocket about end of the game.
+            if (GameFrame.getInstance().getGameMode() == GameMode.ONLINE) {
+
+                // Winner client sends results
+                if (World.getInstance().getMyTank().getScore() >= World.getInstance().getEnemyTank().getScore()) {
+                    // To Be formate as a JSON object
+                    System.out.println("/////////////////////////////////////////////////");
+                    Site.sendResult(Site.getUserName() + Site.getEnemyUsername() +
+                            World.getInstance().getMyTank().getScore() +
+                            World.getInstance().getEnemyTank().getScore());
+                }
+            }
+
             World.destroy();
             GameFrame.getInstance().changeDisplayToMenu();
         }

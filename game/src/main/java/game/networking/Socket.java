@@ -67,13 +67,18 @@ public class Socket {
             MyAction.getInstance().endMatch();
         } else if (message.equals("left")) {
             Main.initializeHostGame();
+            sendMessage("ENEMY_NAME " + Site.getUserName());
         } else if (message.equals("right")) {
             Main.initializeGuestGame();
+            sendMessage("ENEMY_NAME: " + Site.getUserName());
         } else if (message.contains("MAP")) {
             String[] arr = message.split(" ");
             int x = Integer.parseInt(arr[1]);
             float y = Float.parseFloat(arr[2]);
             Ground.getInstance().setYAtX(x, y);
+        } else if (message.contains("ENEMY_NAME")) {
+            String enemyUsername = message.split(" ")[1];
+            Site.setEnemyUsername(enemyUsername);
         }
     }
 

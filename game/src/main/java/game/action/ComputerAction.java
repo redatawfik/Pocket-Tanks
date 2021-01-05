@@ -7,10 +7,11 @@ import java.util.Timer;
 
 public class ComputerAction {
     private static ComputerAction instance;
-    private final Difficulty difficulty = Difficulty.HARD;
+    private static Difficulty difficulty = Difficulty.HARD;
     private float lowerAngel;
-    private float maxHight;
+    private float maxHeight;
     private int indexOfMax;
+
     private ComputerAction() {
     }
 
@@ -23,6 +24,19 @@ public class ComputerAction {
 
     public static void destroy() {
         instance = null;
+    }
+
+    public static void setDifficulty(String result) {
+        switch (result) {
+            case "Easy":
+                difficulty = Difficulty.EASY;
+                return;
+            case "Normal":
+                difficulty = Difficulty.NORMAL;
+                return;
+            case "Hard":
+                difficulty = Difficulty.HARD;
+        }
     }
 
     public void play() {
@@ -44,9 +58,9 @@ public class ComputerAction {
         float rightX = World.getInstance().getRightTank().getX();
         float righty = World.getInstance().getRightTank().getY();
         float range = rightX - leftX;
-        maxHight = Ground.getInstance().getMaxHight();
+        maxHeight = Ground.getInstance().getMaxHight();
         indexOfMax = Ground.getInstance().getIndexOfMax();
-        lowerAngel = (float) Math.toDegrees(Math.atan((maxHight - righty) / (rightX - indexOfMax)));
+        lowerAngel = (float) Math.toDegrees(Math.atan((maxHeight - righty) / (rightX - indexOfMax)));
         int random;
         switch (difficulty) {
             case EASY:
@@ -62,7 +76,7 @@ public class ComputerAction {
                 random = 0;
         }
         float angle = (float) (Math.random() * (90 - lowerAngel) + lowerAngel);
-        float velocity = (float) Math.sqrt((range * 9.8) / Math.sin(Math.toRadians(2 * angle)));
+        float velocity = (float) Math.sqrt((range * 9.8) / Math.sin(Math.toRadians(2 * angle))) * 2;
         if (lefty > righty) velocity++;
         if (lefty < righty) velocity--;
         AbstractAction.getInstance().setPower((int) velocity + random);
