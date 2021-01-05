@@ -11,6 +11,8 @@ public class Ground {
 
     private final float[] mesh;
     private int finishedCells;
+    private float maxHight;
+    private int indexOfMax;
 
     private Ground() {
         this.mesh = new float[110];
@@ -30,7 +32,6 @@ public class Ground {
     public void generateMap() {
 
         for (int i = 0; i < mesh.length; i++) {
-
             float sd = 4f;
             float yy = 0;
             Random random = new Random();
@@ -51,6 +52,10 @@ public class Ground {
                 } else {
                     mesh[j] = (mesh[j - 1] + mesh[j + 1]) / 2;
                 }
+            }
+            if (mesh[i] >= maxHight){
+                maxHight = mesh[i];
+                indexOfMax = i+1;
             }
         }
     }
@@ -99,5 +104,13 @@ public class Ground {
             if (i < 0) continue;
             mesh[i] -= min[y];
         }
+    }
+
+    public float getMaxHight() {
+        return maxHight;
+    }
+
+    public int getIndexOfMax() {
+        return indexOfMax;
     }
 }
