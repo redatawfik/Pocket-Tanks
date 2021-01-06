@@ -40,9 +40,14 @@ public class GameFrame extends JFrame {
 
         getContentPane().add(Menu.getInstance());
 
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         setSize(800, 500);
         //center the JFrame on the screen
         centerWindow(this);
+
+
+        //setResizable(false);
 
         Sound.playBackgroundSound(MENU_MUSIC_PATH);
     }

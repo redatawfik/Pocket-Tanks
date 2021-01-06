@@ -101,7 +101,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 
             // Site.login(userText, String.valueOf(pwdText));
 
-            if (userText.equalsIgnoreCase("player1") &&
+            if ((userText.equalsIgnoreCase("player1") || userText.equalsIgnoreCase("player2")) &&
                     String.valueOf(pwdText).equalsIgnoreCase("12345")) {
                 Site.setLoggedIn(true);
                 Site.setUsername(userText);
