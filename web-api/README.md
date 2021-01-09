@@ -1,4 +1,4 @@
-# Descreption 
+# Description 
 restAPI Written in Native PHP
 
 # Setup
