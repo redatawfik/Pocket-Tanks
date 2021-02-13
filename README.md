@@ -26,6 +26,12 @@ The feature can be split into two main categories:
 6. View the highest score panel.
 7. View other users profile and matches history.
 
+## Screenshots
+![Screenshot menu](https://user-images.githubusercontent.com/13278795/104517246-5e796400-55fe-11eb-8b38-bb85565541bb.png)
+
+
+![Screenshot game](https://user-images.githubusercontent.com/13278795/104517250-60432780-55fe-11eb-9e2f-3473a4aa067e.png)
+
 ## Design
 ### Architecture
 ![architecture](https://user-images.githubusercontent.com/13278795/103447939-dd83a980-4c9a-11eb-8cdc-aa708c3d2263.png)
